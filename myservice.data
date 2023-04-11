@@ -1,0 +1,3495 @@
+package myservice
+
+import (
+	"encoding/xml"
+	"github.com/hooklift/gowsdl/soap"
+	"time"
+)
+
+// against "unused imports"
+var _ time.Time
+var _ xml.Name
+
+type GetTokenByType struct {
+	XMLName xml.Name `xml:" GetTokenByType"`
+	AuthToken string `xml:"authToken,omitempty"`
+	Password string `xml:"password,omitempty"`
+	Type_ *PortalAuthType `xml:"type,omitempty"`
+	IsInternal bool `xml:"isInternal,omitempty"`
+}
+
+type GetTokenByTypeResponse struct {
+	XMLName xml.Name `xml:" GetTokenByTypeResponse"`
+	GetTokenByTypeResult string `xml:"GetTokenByTypeResult,omitempty"`
+}
+
+type GetTokenByLogin struct {
+	XMLName xml.Name `xml:" GetTokenByLogin"`
+	Login string `xml:"login,omitempty"`
+	Password string `xml:"password,omitempty"`
+}
+
+type GetTokenByLoginResponse struct {
+	XMLName xml.Name `xml:" GetTokenByLoginResponse"`
+	GetTokenByLoginResult string `xml:"GetTokenByLoginResult,omitempty"`
+}
+
+type GetTokenByCard struct {
+	XMLName xml.Name `xml:" GetTokenByCard"`
+	CardNumber string `xml:"cardNumber,omitempty"`
+	Password string `xml:"password,omitempty"`
+	IsInternal bool `xml:"isInternal,omitempty"`
+}
+
+type GetTokenByCardResponse struct {
+	XMLName xml.Name `xml:" GetTokenByCardResponse"`
+
+	GetTokenByCardResult string `xml:"GetTokenByCardResult,omitempty"`
+}
+
+type GetTokenByEmail struct {
+	XMLName xml.Name `xml:" GetTokenByEmail"`
+
+	Email string `xml:"email,omitempty"`
+
+	Password string `xml:"password,omitempty"`
+}
+
+type GetTokenByEmailResponse struct {
+	XMLName xml.Name `xml:" GetTokenByEmailResponse"`
+
+	GetTokenByEmailResult string `xml:"GetTokenByEmailResult,omitempty"`
+}
+
+type GetTokenByPhone struct {
+	XMLName xml.Name `xml:" GetTokenByPhone"`
+
+	Phone string `xml:"phone,omitempty"`
+
+	Password string `xml:"password,omitempty"`
+}
+
+type GetTokenByPhoneResponse struct {
+	XMLName xml.Name `xml:" GetTokenByPhoneResponse"`
+
+	GetTokenByPhoneResult string `xml:"GetTokenByPhoneResult,omitempty"`
+}
+
+type SendLogOnCode struct {
+	XMLName xml.Name `xml:" SendLogOnCode"`
+
+	Phone string `xml:"phone,omitempty"`
+
+	Password string `xml:"password,omitempty"`
+}
+
+type SendLogOnCodeResponse struct {
+	XMLName xml.Name `xml:" SendLogOnCodeResponse"`
+
+	SendLogOnCodeResult string `xml:"SendLogOnCodeResult,omitempty"`
+}
+
+type SendTwoPhaseLogOnCode struct {
+	XMLName xml.Name `xml:" SendTwoPhaseLogOnCode"`
+
+	LoginToken string `xml:"loginToken,omitempty"`
+
+	Password string `xml:"password,omitempty"`
+
+	Type_ *PortalAuthType `xml:"type,omitempty"`
+}
+
+type SendTwoPhaseLogOnCodeResponse struct {
+	XMLName xml.Name `xml:" SendTwoPhaseLogOnCodeResponse"`
+
+	SendTwoPhaseLogOnCodeResult string `xml:"SendTwoPhaseLogOnCodeResult,omitempty"`
+}
+
+type ValidateByToken struct {
+	XMLName xml.Name `xml:" ValidateByToken"`
+
+	Token string `xml:"token,omitempty"`
+}
+
+type ValidateByTokenResponse struct {
+	XMLName xml.Name `xml:" ValidateByTokenResponse"`
+
+	ValidateByTokenResult bool `xml:"ValidateByTokenResult,omitempty"`
+}
+
+type ActivateClientService struct {
+	XMLName xml.Name `xml:" ActivateClientService"`
+
+	UserData *RegisterCustomerDTO `xml:"userData,omitempty"`
+
+	Info string `xml:"info,omitempty"`
+}
+
+type ActivateClientServiceResponse struct {
+	XMLName xml.Name `xml:" ActivateClientServiceResponse"`
+
+	ActivateClientServiceResult string `xml:"ActivateClientServiceResult,omitempty"`
+
+	Info string `xml:"info,omitempty"`
+}
+
+type CanActivateCustomer struct {
+	XMLName xml.Name `xml:" CanActivateCustomer"`
+
+	UserData *RegisterCustomerDTO `xml:"userData,omitempty"`
+}
+
+type CanActivateCustomerResponse struct {
+	XMLName xml.Name `xml:" CanActivateCustomerResponse"`
+
+	CanActivateCustomerResult bool `xml:"CanActivateCustomerResult,omitempty"`
+}
+
+type GetCustomerRegisterData struct {
+	XMLName xml.Name `xml:" GetCustomerRegisterData"`
+
+	Number string `xml:"number,omitempty"`
+}
+
+type GetCustomerRegisterDataResponse struct {
+	XMLName xml.Name `xml:" GetCustomerRegisterDataResponse"`
+
+	GetCustomerRegisterDataResult *RegisterCustomerDTO `xml:"GetCustomerRegisterDataResult,omitempty"`
+}
+
+type CheckRegistarionData struct {
+	XMLName xml.Name `xml:" CheckRegistarionData"`
+
+	CardNumber string `xml:"cardNumber,omitempty"`
+
+	Login string `xml:"login,omitempty"`
+}
+
+type CheckRegistarionDataResponse struct {
+	XMLName xml.Name `xml:" CheckRegistarionDataResponse"`
+}
+
+type GetCustomerRegistrationDataByPhone struct {
+	XMLName xml.Name `xml:" GetCustomerRegistrationDataByPhone"`
+
+	Phone string `xml:"phone,omitempty"`
+}
+
+type GetCustomerRegistrationDataByPhoneResponse struct {
+	XMLName xml.Name `xml:" GetCustomerRegistrationDataByPhoneResponse"`
+
+	GetCustomerRegistrationDataByPhoneResult *RegisterCustomerDTO `xml:"GetCustomerRegistrationDataByPhoneResult,omitempty"`
+}
+
+type GetActivateCardType struct {
+	XMLName xml.Name `xml:" GetActivateCardType"`
+
+	CardNumber string `xml:"cardNumber,omitempty"`
+}
+
+type GetActivateCardTypeResponse struct {
+	XMLName xml.Name `xml:" GetActivateCardTypeResponse"`
+
+	GetActivateCardTypeResult *ActivationType `xml:"GetActivateCardTypeResult,omitempty"`
+}
+
+type GetDiscountCardById struct {
+	XMLName xml.Name `xml:" GetDiscountCardById"`
+
+	Token string `xml:"token,omitempty"`
+
+	DiscountCardId int64 `xml:"discountCardId,omitempty"`
+}
+
+type GetDiscountCardByIdResponse struct {
+	XMLName xml.Name `xml:" GetDiscountCardByIdResponse"`
+
+	GetDiscountCardByIdResult *DiscountCard `xml:"GetDiscountCardByIdResult,omitempty"`
+}
+
+type GetDiscountCards struct {
+	XMLName xml.Name `xml:" GetDiscountCards"`
+
+	Token string `xml:"token,omitempty"`
+}
+
+type GetDiscountCardsResponse struct {
+	XMLName xml.Name `xml:" GetDiscountCardsResponse"`
+
+	GetDiscountCardsResult *ArrayOfDiscountCard `xml:"GetDiscountCardsResult,omitempty"`
+}
+
+type GetPhoneDiscountCards struct {
+	XMLName xml.Name `xml:" GetPhoneDiscountCards"`
+
+	Token string `xml:"token,omitempty"`
+
+	Phone string `xml:"phone,omitempty"`
+}
+
+type GetPhoneDiscountCardsResponse struct {
+	XMLName xml.Name `xml:" GetPhoneDiscountCardsResponse"`
+
+	GetPhoneDiscountCardsResult *ArrayOfDiscountCard `xml:"GetPhoneDiscountCardsResult,omitempty"`
+}
+
+type BindDiscountCardToCustomer struct {
+	XMLName xml.Name `xml:" BindDiscountCardToCustomer"`
+
+	Token string `xml:"token,omitempty"`
+
+	DiscountCardNumber string `xml:"discountCardNumber,omitempty"`
+
+	Pin string `xml:"pin,omitempty"`
+}
+
+type BindDiscountCardToCustomerResponse struct {
+	XMLName xml.Name `xml:" BindDiscountCardToCustomerResponse"`
+
+	BindDiscountCardToCustomerResult string `xml:"BindDiscountCardToCustomerResult,omitempty"`
+}
+
+type BindDiscountCardToPhone struct {
+	XMLName xml.Name `xml:" BindDiscountCardToPhone"`
+
+	Token string `xml:"token,omitempty"`
+
+	Phone string `xml:"phone,omitempty"`
+
+	DiscountCardNumber string `xml:"discountCardNumber,omitempty"`
+
+	Pin string `xml:"pin,omitempty"`
+}
+
+type BindDiscountCardToPhoneResponse struct {
+	XMLName xml.Name `xml:" BindDiscountCardToPhoneResponse"`
+
+	BindDiscountCardToPhoneResult string `xml:"BindDiscountCardToPhoneResult,omitempty"`
+}
+
+type CanBindDiscountCard struct {
+	XMLName xml.Name `xml:" CanBindDiscountCard"`
+
+	Token string `xml:"token,omitempty"`
+
+	CardNumber string `xml:"cardNumber,omitempty"`
+
+	Pin string `xml:"pin,omitempty"`
+
+	CompanyId int64 `xml:"companyId,omitempty"`
+
+	Amount float64 `xml:"amount,omitempty"`
+}
+
+type CanBindDiscountCardResponse struct {
+	XMLName xml.Name `xml:" CanBindDiscountCardResponse"`
+
+	CanBindDiscountCardResult *CanBindCardDTO `xml:"CanBindDiscountCardResult,omitempty"`
+}
+
+type BindVirtualDiscountCardToCustomer struct {
+	XMLName xml.Name `xml:" BindVirtualDiscountCardToCustomer"`
+
+	Token string `xml:"token,omitempty"`
+}
+
+type BindVirtualDiscountCardToCustomerResponse struct {
+	XMLName xml.Name `xml:" BindVirtualDiscountCardToCustomerResponse"`
+
+	BindVirtualDiscountCardToCustomerResult string `xml:"BindVirtualDiscountCardToCustomerResult,omitempty"`
+}
+
+type BlockCard struct {
+	XMLName xml.Name `xml:" BlockCard"`
+
+	Token string `xml:"token,omitempty"`
+
+	DiscountCardId int64 `xml:"discountCardId,omitempty"`
+}
+
+type BlockCardResponse struct {
+	XMLName xml.Name `xml:" BlockCardResponse"`
+}
+
+type BlockCardByPhone struct {
+	XMLName xml.Name `xml:" BlockCardByPhone"`
+
+	Token string `xml:"token,omitempty"`
+
+	Phone string `xml:"phone,omitempty"`
+
+	DiscountCardNumber string `xml:"discountCardNumber,omitempty"`
+}
+
+type BlockCardByPhoneResponse struct {
+	XMLName xml.Name `xml:" BlockCardByPhoneResponse"`
+}
+
+type GetDiscountCard struct {
+	XMLName xml.Name `xml:" GetDiscountCard"`
+
+	DiscountCardNumber string `xml:"discountCardNumber,omitempty"`
+}
+
+type GetDiscountCardResponse struct {
+	XMLName xml.Name `xml:" GetDiscountCardResponse"`
+
+	GetDiscountCardResult *DiscountCard `xml:"GetDiscountCardResult,omitempty"`
+}
+
+type HasDiscountCardPin struct {
+	XMLName xml.Name `xml:" HasDiscountCardPin"`
+
+	DiscountCardNumber string `xml:"discountCardNumber,omitempty"`
+}
+
+type HasDiscountCardPinResponse struct {
+	XMLName xml.Name `xml:" HasDiscountCardPinResponse"`
+
+	HasDiscountCardPinResult bool `xml:"HasDiscountCardPinResult,omitempty"`
+}
+
+type DiscountCardIsExist struct {
+	XMLName xml.Name `xml:" DiscountCardIsExist"`
+
+	DiscountCardNumber string `xml:"discountCardNumber,omitempty"`
+}
+
+type DiscountCardIsExistResponse struct {
+	XMLName xml.Name `xml:" DiscountCardIsExistResponse"`
+
+	DiscountCardIsExistResult bool `xml:"DiscountCardIsExistResult,omitempty"`
+}
+
+type DiscountCardIsVirtual struct {
+	XMLName xml.Name `xml:" DiscountCardIsVirtual"`
+
+	DiscountCardNumber string `xml:"discountCardNumber,omitempty"`
+}
+
+type DiscountCardIsVirtualResponse struct {
+	XMLName xml.Name `xml:" DiscountCardIsVirtualResponse"`
+
+	DiscountCardIsVirtualResult bool `xml:"DiscountCardIsVirtualResult,omitempty"`
+}
+
+type DiscountCardIsPersonalized struct {
+	XMLName xml.Name `xml:" DiscountCardIsPersonalized"`
+
+	DiscountCardNumber string `xml:"discountCardNumber,omitempty"`
+}
+
+type DiscountCardIsPersonalizedResponse struct {
+	XMLName xml.Name `xml:" DiscountCardIsPersonalizedResponse"`
+
+	DiscountCardIsPersonalizedResult bool `xml:"DiscountCardIsPersonalizedResult,omitempty"`
+}
+
+type HasFreeVirtualDiscountCards struct {
+	XMLName xml.Name `xml:" HasFreeVirtualDiscountCards"`
+}
+
+type HasFreeVirtualDiscountCardsResponse struct {
+	XMLName xml.Name `xml:" HasFreeVirtualDiscountCardsResponse"`
+
+	HasFreeVirtualDiscountCardsResult bool `xml:"HasFreeVirtualDiscountCardsResult,omitempty"`
+}
+
+type ActivateDiscountCard struct {
+	XMLName xml.Name `xml:" ActivateDiscountCard"`
+
+	Token string `xml:"token,omitempty"`
+
+	DiscountCardId int64 `xml:"discountCardId,omitempty"`
+}
+
+type ActivateDiscountCardResponse struct {
+	XMLName xml.Name `xml:" ActivateDiscountCardResponse"`
+
+	ActivateDiscountCardResult bool `xml:"ActivateDiscountCardResult,omitempty"`
+}
+
+type GetCustomersProperties struct {
+	XMLName xml.Name `xml:" GetCustomersProperties"`
+
+	NeedIncludeEmail bool `xml:"needIncludeEmail,omitempty"`
+
+	EditOnly bool `xml:"editOnly,omitempty"`
+}
+
+type GetCustomersPropertiesResponse struct {
+	XMLName xml.Name `xml:" GetCustomersPropertiesResponse"`
+
+	GetCustomersPropertiesResult *ArrayOfProperty `xml:"GetCustomersPropertiesResult,omitempty"`
+}
+
+type GetCustomerData struct {
+	XMLName xml.Name `xml:" GetCustomerData"`
+
+	Token string `xml:"token,omitempty"`
+}
+
+type GetCustomerDataResponse struct {
+	XMLName xml.Name `xml:" GetCustomerDataResponse"`
+
+	GetCustomerDataResult *Customer `xml:"GetCustomerDataResult,omitempty"`
+}
+
+type SaveCustomerData struct {
+	XMLName xml.Name `xml:" SaveCustomerData"`
+
+	Token string `xml:"token,omitempty"`
+
+	Customer *Customer `xml:"customer,omitempty"`
+
+	InfoText string `xml:"infoText,omitempty"`
+}
+
+type SaveCustomerDataResponse struct {
+	XMLName xml.Name `xml:" SaveCustomerDataResponse"`
+
+	SaveCustomerDataResult *Customer `xml:"SaveCustomerDataResult,omitempty"`
+
+	InfoText string `xml:"infoText,omitempty"`
+}
+
+type SaveCustomerPhone struct {
+	XMLName xml.Name `xml:" SaveCustomerPhone"`
+
+	Token string `xml:"token,omitempty"`
+
+	Phone string `xml:"phone,omitempty"`
+
+	CheckCode string `xml:"checkCode,omitempty"`
+
+	Info string `xml:"info,omitempty"`
+}
+
+type SaveCustomerPhoneResponse struct {
+	XMLName xml.Name `xml:" SaveCustomerPhoneResponse"`
+
+	SaveCustomerPhoneResult string `xml:"SaveCustomerPhoneResult,omitempty"`
+
+	Info string `xml:"info,omitempty"`
+}
+
+type GetNotAcceptedTermsOfUsing struct {
+	XMLName xml.Name `xml:" GetNotAcceptedTermsOfUsing"`
+
+	Token string `xml:"token,omitempty"`
+}
+
+type GetNotAcceptedTermsOfUsingResponse struct {
+	XMLName xml.Name `xml:" GetNotAcceptedTermsOfUsingResponse"`
+
+	GetNotAcceptedTermsOfUsingResult *ArrayOflong `xml:"GetNotAcceptedTermsOfUsingResult,omitempty"`
+}
+
+type AcceptTermsOfUsing struct {
+	XMLName xml.Name `xml:" AcceptTermsOfUsing"`
+
+	Token string `xml:"token,omitempty"`
+
+	Dictionary *ArrayOfKeyValueOflongboolean `xml:"dictionary,omitempty"`
+}
+
+type AcceptTermsOfUsingResponse struct {
+	XMLName xml.Name `xml:" AcceptTermsOfUsingResponse"`
+
+	AcceptTermsOfUsingResult *ArrayOfstring `xml:"AcceptTermsOfUsingResult,omitempty"`
+}
+
+type GetIndicators struct {
+	XMLName xml.Name `xml:" GetIndicators"`
+
+	Token string `xml:"token,omitempty"`
+
+	CompanyID int64 `xml:"companyID,omitempty"`
+}
+
+type GetIndicatorsResponse struct {
+	XMLName xml.Name `xml:" GetIndicatorsResponse"`
+
+	GetIndicatorsResult *ArrayOfIndicator `xml:"GetIndicatorsResult,omitempty"`
+}
+
+type GetChips struct {
+	XMLName xml.Name `xml:" GetChips"`
+
+	Token string `xml:"token,omitempty"`
+
+	CompanyID int64 `xml:"companyID,omitempty"`
+}
+
+type GetChipsResponse struct {
+	XMLName xml.Name `xml:" GetChipsResponse"`
+
+	GetChipsResult *ArrayOfChipsDTO `xml:"GetChipsResult,omitempty"`
+}
+
+type GetRetirementInfo struct {
+	XMLName xml.Name `xml:" GetRetirementInfo"`
+
+	Token string `xml:"token,omitempty"`
+}
+
+type GetRetirementInfoResponse struct {
+	XMLName xml.Name `xml:" GetRetirementInfoResponse"`
+
+	GetRetirementInfoResult *ArrayOfstring `xml:"GetRetirementInfoResult,omitempty"`
+}
+
+type GetRetirementData struct {
+	XMLName xml.Name `xml:" GetRetirementData"`
+
+	Token string `xml:"token,omitempty"`
+}
+
+type GetRetirementDataResponse struct {
+	XMLName xml.Name `xml:" GetRetirementDataResponse"`
+
+	GetRetirementDataResult *ArrayOfRetirementDataDTO `xml:"GetRetirementDataResult,omitempty"`
+}
+
+type GetOffers struct {
+	XMLName xml.Name `xml:" GetOffers"`
+
+	Token string `xml:"token,omitempty"`
+
+	CompanyID int64 `xml:"companyID,omitempty"`
+
+	AreaID int64 `xml:"areaID,omitempty"`
+}
+
+type GetOffersResponse struct {
+	XMLName xml.Name `xml:" GetOffersResponse"`
+
+	GetOffersResult *ArrayOfstring `xml:"GetOffersResult,omitempty"`
+}
+
+type GetAllOperations struct {
+	XMLName xml.Name `xml:" GetAllOperations"`
+
+	Token string `xml:"token,omitempty"`
+}
+
+type GetAllOperationsResponse struct {
+	XMLName xml.Name `xml:" GetAllOperationsResponse"`
+
+	GetAllOperationsResult *ArrayOfCheque `xml:"GetAllOperationsResult,omitempty"`
+}
+
+type GetOperations struct {
+	XMLName xml.Name `xml:" GetOperations"`
+
+	Token string `xml:"token,omitempty"`
+
+	CompanyId int64 `xml:"companyId,omitempty"`
+
+	StoresIDs *ArrayOflong `xml:"storesIDs,omitempty"`
+
+	DateFrom time.Time `xml:"dateFrom,omitempty"`
+
+	DateTo time.Time `xml:"dateTo,omitempty"`
+
+	Skip int32 `xml:"skip,omitempty"`
+
+	Take int32 `xml:"take,omitempty"`
+}
+
+type GetOperationsResponse struct {
+	XMLName xml.Name `xml:" GetOperationsResponse"`
+
+	GetOperationsResult *ArrayOfCheque `xml:"GetOperationsResult,omitempty"`
+}
+
+type GetAllUserTransactions struct {
+	XMLName xml.Name `xml:" GetAllUserTransactions"`
+
+	Token string `xml:"token,omitempty"`
+}
+
+type GetAllUserTransactionsResponse struct {
+	XMLName xml.Name `xml:" GetAllUserTransactionsResponse"`
+
+	GetAllUserTransactionsResult *ArrayOfTransaction `xml:"GetAllUserTransactionsResult,omitempty"`
+}
+
+type GetUserTransactions struct {
+	XMLName xml.Name `xml:" GetUserTransactions"`
+
+	Token string `xml:"token,omitempty"`
+
+	CompanуId int64 `xml:"companуId,omitempty"`
+
+	DiscountCardIDs *ArrayOflong `xml:"discountCardIDs,omitempty"`
+
+	DateFrom time.Time `xml:"dateFrom,omitempty"`
+
+	DateTo time.Time `xml:"dateTo,omitempty"`
+
+	Skip int32 `xml:"skip,omitempty"`
+
+	Take int32 `xml:"take,omitempty"`
+}
+
+type GetUserTransactionsResponse struct {
+	XMLName xml.Name `xml:" GetUserTransactionsResponse"`
+
+	GetUserTransactionsResult *ArrayOfTransaction `xml:"GetUserTransactionsResult,omitempty"`
+}
+
+type GetRegistrationDate struct {
+	XMLName xml.Name `xml:" GetRegistrationDate"`
+
+	Token string `xml:"token,omitempty"`
+}
+
+type GetRegistrationDateResponse struct {
+	XMLName xml.Name `xml:" GetRegistrationDateResponse"`
+
+	GetRegistrationDateResult time.Time `xml:"GetRegistrationDateResult,omitempty"`
+}
+
+type GetMessages struct {
+	XMLName xml.Name `xml:" GetMessages"`
+
+	Token string `xml:"token,omitempty"`
+
+	CompanyId int64 `xml:"companyId,omitempty"`
+}
+
+type GetMessagesResponse struct {
+	XMLName xml.Name `xml:" GetMessagesResponse"`
+
+	GetMessagesResult *ArrayOfMailingToCustomer `xml:"GetMessagesResult,omitempty"`
+}
+
+type SetReadStatus struct {
+	XMLName xml.Name `xml:" SetReadStatus"`
+
+	Token string `xml:"token,omitempty"`
+
+	MessageId *ArrayOflong `xml:"messageId,omitempty"`
+
+	Readed bool `xml:"readed,omitempty"`
+}
+
+type SetReadStatusResponse struct {
+	XMLName xml.Name `xml:" SetReadStatusResponse"`
+}
+
+type DeleteMessages struct {
+	XMLName xml.Name `xml:" DeleteMessages"`
+
+	Token string `xml:"token,omitempty"`
+
+	MailsListId *ArrayOflong `xml:"mailsListId,omitempty"`
+}
+
+type DeleteMessagesResponse struct {
+	XMLName xml.Name `xml:" DeleteMessagesResponse"`
+}
+
+type GetUnreadMessagesCount struct {
+	XMLName xml.Name `xml:" GetUnreadMessagesCount"`
+
+	Token string `xml:"token,omitempty"`
+
+	CompanyId int64 `xml:"companyId,omitempty"`
+}
+
+type GetUnreadMessagesCountResponse struct {
+	XMLName xml.Name `xml:" GetUnreadMessagesCountResponse"`
+
+	GetUnreadMessagesCountResult int32 `xml:"GetUnreadMessagesCountResult,omitempty"`
+}
+
+type GetMessage struct {
+	XMLName xml.Name `xml:" GetMessage"`
+
+	Token string `xml:"token,omitempty"`
+
+	MessageId int64 `xml:"messageId,omitempty"`
+}
+
+type GetMessageResponse struct {
+	XMLName xml.Name `xml:" GetMessageResponse"`
+
+	GetMessageResult *MailingToCustomer `xml:"GetMessageResult,omitempty"`
+}
+
+type SendVerifyCode struct {
+	XMLName xml.Name `xml:" SendVerifyCode"`
+
+	Token string `xml:"token,omitempty"`
+
+	Phone string `xml:"phone,omitempty"`
+}
+
+type SendVerifyCodeResponse struct {
+	XMLName xml.Name `xml:" SendVerifyCodeResponse"`
+
+	SendVerifyCodeResult string `xml:"SendVerifyCodeResult,omitempty"`
+}
+
+type TestPhoneNumberVerifyCode struct {
+	XMLName xml.Name `xml:" TestPhoneNumberVerifyCode"`
+
+	Token string `xml:"token,omitempty"`
+
+	Code string `xml:"code,omitempty"`
+}
+
+type TestPhoneNumberVerifyCodeResponse struct {
+	XMLName xml.Name `xml:" TestPhoneNumberVerifyCodeResponse"`
+
+	TestPhoneNumberVerifyCodeResult string `xml:"TestPhoneNumberVerifyCodeResult,omitempty"`
+}
+
+type CheckSavedPhoneIsVerified struct {
+	XMLName xml.Name `xml:" CheckSavedPhoneIsVerified"`
+
+	Token string `xml:"token,omitempty"`
+}
+
+type CheckSavedPhoneIsVerifiedResponse struct {
+	XMLName xml.Name `xml:" CheckSavedPhoneIsVerifiedResponse"`
+
+	CheckSavedPhoneIsVerifiedResult bool `xml:"CheckSavedPhoneIsVerifiedResult,omitempty"`
+}
+
+type SendCode struct {
+	XMLName xml.Name `xml:" SendCode"`
+
+	Phone string `xml:"phone,omitempty"`
+}
+
+type SendCodeResponse struct {
+	XMLName xml.Name `xml:" SendCodeResponse"`
+
+	SendCodeResult string `xml:"SendCodeResult,omitempty"`
+}
+
+type TestCode struct {
+	XMLName xml.Name `xml:" TestCode"`
+
+	Phone string `xml:"phone,omitempty"`
+
+	Code string `xml:"code,omitempty"`
+}
+
+type TestCodeResponse struct {
+	XMLName xml.Name `xml:" TestCodeResponse"`
+
+	TestCodeResult string `xml:"TestCodeResult,omitempty"`
+}
+
+type GetCouponsMessages struct {
+	XMLName xml.Name `xml:" GetCouponsMessages"`
+
+	Token string `xml:"token,omitempty"`
+
+	CompanyID int64 `xml:"companyID,omitempty"`
+}
+
+type GetCouponsMessagesResponse struct {
+	XMLName xml.Name `xml:" GetCouponsMessagesResponse"`
+
+	GetCouponsMessagesResult *ArrayOfMailingToCustomer `xml:"GetCouponsMessagesResult,omitempty"`
+}
+
+type GetCouponOffers struct {
+	XMLName xml.Name `xml:" GetCouponOffers"`
+
+	Token string `xml:"token,omitempty"`
+
+	CompanyID int64 `xml:"companyID,omitempty"`
+}
+
+type GetCouponOffersResponse struct {
+	XMLName xml.Name `xml:" GetCouponOffersResponse"`
+
+	GetCouponOffersResult *ArrayOfCoupon `xml:"GetCouponOffersResult,omitempty"`
+}
+
+type UseCouponOffer struct {
+	XMLName xml.Name `xml:" UseCouponOffer"`
+
+	Token string `xml:"token,omitempty"`
+
+	CouponID int64 `xml:"couponID,omitempty"`
+}
+
+type UseCouponOfferResponse struct {
+	XMLName xml.Name `xml:" UseCouponOfferResponse"`
+}
+
+type ChangePassword struct {
+	XMLName xml.Name `xml:" ChangePassword"`
+
+	Token string `xml:"token,omitempty"`
+
+	NewPassword string `xml:"newPassword,omitempty"`
+
+	CheckToken string `xml:"checkToken,omitempty"`
+
+	Info string `xml:"info,omitempty"`
+}
+
+type ChangePasswordResponse struct {
+	XMLName xml.Name `xml:" ChangePasswordResponse"`
+
+	ChangePasswordResult bool `xml:"ChangePasswordResult,omitempty"`
+}
+
+type CheckUserToken struct {
+	XMLName xml.Name `xml:" CheckUserToken"`
+
+	Token string `xml:"token,omitempty"`
+
+	CheckToken string `xml:"checkToken,omitempty"`
+}
+
+type CheckUserTokenResponse struct {
+	XMLName xml.Name `xml:" CheckUserTokenResponse"`
+
+	CheckUserTokenResult bool `xml:"CheckUserTokenResult,omitempty"`
+}
+
+type SendForgetPasswordInfo struct {
+	XMLName xml.Name `xml:" SendForgetPasswordInfo"`
+
+	Token string `xml:"token,omitempty"`
+
+	Type_ *PortalAuthType `xml:"type,omitempty"`
+
+	IsActivation bool `xml:"isActivation,omitempty"`
+}
+
+type SendForgetPasswordInfoResponse struct {
+	XMLName xml.Name `xml:" SendForgetPasswordInfoResponse"`
+}
+
+type SendSmsForgetPasswordInfo struct {
+	XMLName xml.Name `xml:" SendSmsForgetPasswordInfo"`
+
+	TokenPart string `xml:"tokenPart,omitempty"`
+
+	SmsToken string `xml:"smsToken,omitempty"`
+
+	Type_ *PortalAuthType `xml:"type,omitempty"`
+
+	IsActivation bool `xml:"isActivation,omitempty"`
+}
+
+type SendSmsForgetPasswordInfoResponse struct {
+	XMLName xml.Name `xml:" SendSmsForgetPasswordInfoResponse"`
+
+	SendSmsForgetPasswordInfoResult string `xml:"SendSmsForgetPasswordInfoResult,omitempty"`
+
+	SmsToken string `xml:"smsToken,omitempty"`
+}
+
+type GetRestorePasswordData struct {
+	XMLName xml.Name `xml:" GetRestorePasswordData"`
+
+	Code string `xml:"code,omitempty"`
+
+	Info string `xml:"info,omitempty"`
+
+	Type_ *PortalAuthType `xml:"type,omitempty"`
+}
+
+type GetRestorePasswordDataResponse struct {
+	XMLName xml.Name `xml:" GetRestorePasswordDataResponse"`
+
+	GetRestorePasswordDataResult *ArrayOfKeyValueOfstringstring `xml:"GetRestorePasswordDataResult,omitempty"`
+}
+
+type TestForgetPasswordVerifyCode struct {
+	XMLName xml.Name `xml:" TestForgetPasswordVerifyCode"`
+
+	SmsToken string `xml:"smsToken,omitempty"`
+
+	Code string `xml:"code,omitempty"`
+
+	Token string `xml:"token,omitempty"`
+
+	CheckToken string `xml:"checkToken,omitempty"`
+}
+
+type TestForgetPasswordVerifyCodeResponse struct {
+	XMLName xml.Name `xml:" TestForgetPasswordVerifyCodeResponse"`
+
+	TestForgetPasswordVerifyCodeResult string `xml:"TestForgetPasswordVerifyCodeResult,omitempty"`
+
+	Token string `xml:"token,omitempty"`
+
+	CheckToken string `xml:"checkToken,omitempty"`
+}
+
+type GetItemFavoriteCategories struct {
+	XMLName xml.Name `xml:" GetItemFavoriteCategories"`
+
+	Token string `xml:"token,omitempty"`
+
+	CompanyID int64 `xml:"companyID,omitempty"`
+
+	GetAll bool `xml:"getAll,omitempty"`
+}
+
+type GetItemFavoriteCategoriesResponse struct {
+	XMLName xml.Name `xml:" GetItemFavoriteCategoriesResponse"`
+
+	GetItemFavoriteCategoriesResult *ArrayOfItemFavoriteCategory `xml:"GetItemFavoriteCategoriesResult,omitempty"`
+}
+
+type SaveCustomerFavoriteCategories struct {
+	XMLName xml.Name `xml:" SaveCustomerFavoriteCategories"`
+
+	Token string `xml:"token,omitempty"`
+
+	CompanyId int64 `xml:"companyId,omitempty"`
+
+	FavoriteCategories *ArrayOfItemFavoriteCategory `xml:"favoriteCategories,omitempty"`
+
+	Error string `xml:"error,omitempty"`
+}
+
+type SaveCustomerFavoriteCategoriesResponse struct {
+	XMLName xml.Name `xml:" SaveCustomerFavoriteCategoriesResponse"`
+
+	SaveCustomerFavoriteCategoriesResult *ArrayOfItemFavoriteCategory `xml:"SaveCustomerFavoriteCategoriesResult,omitempty"`
+
+	Error string `xml:"error,omitempty"`
+}
+
+type GetLastItemFavoriteCategoryChandgeDate struct {
+	XMLName xml.Name `xml:" GetLastItemFavoriteCategoryChandgeDate"`
+
+	Token string `xml:"token,omitempty"`
+}
+
+type GetLastItemFavoriteCategoryChandgeDateResponse struct {
+	XMLName xml.Name `xml:" GetLastItemFavoriteCategoryChandgeDateResponse"`
+
+	GetLastItemFavoriteCategoryChandgeDateResult *ArrayOfKeyValueOflongNullableOfdateTimeU6ho3Bhd `xml:"GetLastItemFavoriteCategoryChandgeDateResult,omitempty"`
+}
+
+type GetLastItemFavoriteCategoryChandgeDateByCompany struct {
+	XMLName xml.Name `xml:" GetLastItemFavoriteCategoryChandgeDateByCompany"`
+
+	Token string `xml:"token,omitempty"`
+
+	CompanyId int64 `xml:"companyId,omitempty"`
+}
+
+type GetLastItemFavoriteCategoryChandgeDateByCompanyResponse struct {
+	XMLName xml.Name `xml:" GetLastItemFavoriteCategoryChandgeDateByCompanyResponse"`
+
+	GetLastItemFavoriteCategoryChandgeDateByCompanyResult time.Time `xml:"GetLastItemFavoriteCategoryChandgeDateByCompanyResult,omitempty"`
+}
+
+type GetFavoriteItemsExpiried struct {
+	XMLName xml.Name `xml:" GetFavoriteItemsExpiried"`
+
+	Token string `xml:"token,omitempty"`
+
+	CompanyId int64 `xml:"companyId,omitempty"`
+}
+
+type GetFavoriteItemsExpiriedResponse struct {
+	XMLName xml.Name `xml:" GetFavoriteItemsExpiriedResponse"`
+
+	GetFavoriteItemsExpiriedResult *ArrayOfstring `xml:"GetFavoriteItemsExpiriedResult,omitempty"`
+}
+
+type GetLoyaltySettings struct {
+	XMLName xml.Name `xml:" GetLoyaltySettings"`
+}
+
+type GetLoyaltySettingsResponse struct {
+	XMLName xml.Name `xml:" GetLoyaltySettingsResponse"`
+
+	GetLoyaltySettingsResult *ArrayOfLoyaltySettingDTO `xml:"GetLoyaltySettingsResult,omitempty"`
+}
+
+type GetStores struct {
+	XMLName xml.Name `xml:" GetStores"`
+
+	Token string `xml:"token,omitempty"`
+
+	CompanyID int64 `xml:"companyID,omitempty"`
+
+	AreaID int64 `xml:"areaID,omitempty"`
+}
+
+type GetStoresResponse struct {
+	XMLName xml.Name `xml:" GetStoresResponse"`
+
+	GetStoresResult *ArrayOfStore `xml:"GetStoresResult,omitempty"`
+}
+
+type GetStore struct {
+	XMLName xml.Name `xml:" GetStore"`
+
+	Token string `xml:"token,omitempty"`
+
+	Id int64 `xml:"id,omitempty"`
+}
+
+type GetStoreResponse struct {
+	XMLName xml.Name `xml:" GetStoreResponse"`
+
+	GetStoreResult *Store `xml:"GetStoreResult,omitempty"`
+}
+
+type GetStoreProperties struct {
+	XMLName xml.Name `xml:" GetStoreProperties"`
+}
+
+type GetStorePropertiesResponse struct {
+	XMLName xml.Name `xml:" GetStorePropertiesResponse"`
+
+	GetStorePropertiesResult *ArrayOfProperty `xml:"GetStorePropertiesResult,omitempty"`
+}
+
+type GetStorePropertyValues struct {
+	XMLName xml.Name `xml:" GetStorePropertyValues"`
+
+	StoreID int64 `xml:"storeID,omitempty"`
+}
+
+type GetStorePropertyValuesResponse struct {
+	XMLName xml.Name `xml:" GetStorePropertyValuesResponse"`
+
+	GetStorePropertyValuesResult *ArrayOfStorePropertyValue `xml:"GetStorePropertyValuesResult,omitempty"`
+}
+
+type GetCompanies struct {
+	XMLName xml.Name `xml:" GetCompanies"`
+}
+
+type GetCompaniesResponse struct {
+	XMLName xml.Name `xml:" GetCompaniesResponse"`
+
+	GetCompaniesResult *ArrayOfCompany `xml:"GetCompaniesResult,omitempty"`
+}
+
+type GetAdministrativeAreas struct {
+	XMLName xml.Name `xml:" GetAdministrativeAreas"`
+
+	CompanyID int64 `xml:"companyID,omitempty"`
+}
+
+type GetAdministrativeAreasResponse struct {
+	XMLName xml.Name `xml:" GetAdministrativeAreasResponse"`
+
+	GetAdministrativeAreasResult *ArrayOfAdministrativeAreaDTO `xml:"GetAdministrativeAreasResult,omitempty"`
+}
+
+type GetLocalities struct {
+	XMLName xml.Name `xml:" GetLocalities"`
+
+	AreaID int64 `xml:"areaID,omitempty"`
+}
+
+type GetLocalitiesResponse struct {
+	XMLName xml.Name `xml:" GetLocalitiesResponse"`
+
+	GetLocalitiesResult *ArrayOfLocalityDTO `xml:"GetLocalitiesResult,omitempty"`
+}
+
+type About struct {
+	XMLName xml.Name `xml:" About"`
+}
+
+type AboutResponse struct {
+	XMLName xml.Name `xml:" AboutResponse"`
+
+	AboutResult *ArrayOfAboutDTO `xml:"AboutResult,omitempty"`
+}
+
+type GetFakeColorType struct {
+	XMLName xml.Name `xml:" GetFakeColorType"`
+}
+
+type GetFakeColorTypeResponse struct {
+	XMLName xml.Name `xml:" GetFakeColorTypeResponse"`
+
+	GetFakeColorTypeResult *ColorType `xml:"GetFakeColorTypeResult,omitempty"`
+}
+
+type GetFakeRegistrationBotProtectionType struct {
+	XMLName xml.Name `xml:" GetFakeRegistrationBotProtectionType"`
+}
+
+type GetFakeRegistrationBotProtectionTypeResponse struct {
+	XMLName xml.Name `xml:" GetFakeRegistrationBotProtectionTypeResponse"`
+
+	GetFakeRegistrationBotProtectionTypeResult *RegistrationBotProtectionType `xml:"GetFakeRegistrationBotProtectionTypeResult,omitempty"`
+}
+
+type Char int32
+
+type Duration *Duration
+
+type Guid string
+
+type PortalAuthType string
+
+const (
+	PortalAuthTypeUnknown PortalAuthType = "Unknown"
+
+	PortalAuthTypeAll PortalAuthType = "All"
+
+	PortalAuthTypeLogin PortalAuthType = "Login"
+
+	PortalAuthTypeCard PortalAuthType = "Card"
+
+	PortalAuthTypeEmail PortalAuthType = "Email"
+
+	PortalAuthTypePhone PortalAuthType = "Phone"
+
+	PortalAuthTypeToken PortalAuthType = "Token"
+)
+
+type ActivationType string
+
+const (
+	ActivationTypeNone ActivationType = "None"
+
+	ActivationTypeByPhone ActivationType = "ByPhone"
+
+	ActivationTypeByEmail ActivationType = "ByEmail"
+)
+
+type RegisterCustomerDTO struct {
+	CanRegister bool `xml:"CanRegister,omitempty"`
+
+	CreateVirtual bool `xml:"CreateVirtual,omitempty"`
+
+	DiscountCardNumber string `xml:"DiscountCardNumber,omitempty"`
+
+	FirstName string `xml:"FirstName,omitempty"`
+
+	HasCards bool `xml:"HasCards,omitempty"`
+
+	LastName string `xml:"LastName,omitempty"`
+
+	Login string `xml:"Login,omitempty"`
+
+	NeedFirstName bool `xml:"NeedFirstName,omitempty"`
+
+	NeedLastName bool `xml:"NeedLastName,omitempty"`
+
+	NeedSecondName bool `xml:"NeedSecondName,omitempty"`
+
+	Password string `xml:"Password,omitempty"`
+
+	PinCode string `xml:"PinCode,omitempty"`
+
+	Properties *ArrayOfCustomerPropertyValue `xml:"Properties,omitempty"`
+
+	SecondName string `xml:"SecondName,omitempty"`
+
+	TermsOfUsing *ArrayOfKeyValueOflongboolean `xml:"TermsOfUsing,omitempty"`
+}
+
+type ArrayOfCustomerPropertyValue struct {
+	CustomerPropertyValue []*CustomerPropertyValue `xml:"CustomerPropertyValue,omitempty"`
+}
+
+type CustomerPropertyValue struct {
+	*PropertyValue
+
+	CustomerPropertyID int64 `xml:"CustomerPropertyID,omitempty"`
+}
+
+type PropertyValue struct {
+	BooleanValue bool `xml:"BooleanValue,omitempty"`
+
+	DateValue time.Time `xml:"DateValue,omitempty"`
+
+	EnumValue *EnumPropertyValue `xml:"EnumValue,omitempty"`
+
+	EnumValues *ArrayOfEnumPropertyValue `xml:"EnumValues,omitempty"`
+
+	IntValue int32 `xml:"IntValue,omitempty"`
+
+	Property *Property `xml:"Property,omitempty"`
+
+	StringValue string `xml:"StringValue,omitempty"`
+}
+
+type EnumPropertyValue struct {
+	EnumPropertyValueID int64 `xml:"EnumPropertyValueID,omitempty"`
+
+	IsDeleted bool `xml:"IsDeleted,omitempty"`
+
+	LoadDate time.Time `xml:"LoadDate,omitempty"`
+
+	Name string `xml:"Name,omitempty"`
+}
+
+type ArrayOfEnumPropertyValue struct {
+	EnumPropertyValue []*EnumPropertyValue `xml:"EnumPropertyValue,omitempty"`
+}
+
+type Property struct {
+	*PropertyRef
+
+	IsDeleted bool `xml:"IsDeleted,omitempty"`
+
+	Pattern string `xml:"Pattern,omitempty"`
+
+	PresetType *PresetPropertyType `xml:"PresetType,omitempty"`
+
+	UseInFilter bool `xml:"UseInFilter,omitempty"`
+
+	UserEditType *UserEditType `xml:"UserEditType,omitempty"`
+
+	Values *ArrayOfEnumPropertyValue `xml:"Values,omitempty"`
+}
+
+type PropertyRef struct {
+	IsRequired bool `xml:"IsRequired,omitempty"`
+
+	IsUnique bool `xml:"IsUnique,omitempty"`
+
+	LoadDate time.Time `xml:"LoadDate,omitempty"`
+
+	Name string `xml:"Name,omitempty"`
+
+	ObjectType *ObjectType `xml:"ObjectType,omitempty"`
+
+	Position int32 `xml:"Position,omitempty"`
+
+	PropertyID int64 `xml:"PropertyID,omitempty"`
+
+	PropertyType *PropertyType `xml:"PropertyType,omitempty"`
+}
+
+type StorePropertyValue struct {
+	*PropertyValue
+
+	StorePropertyID int32 `xml:"StorePropertyID,omitempty"`
+}
+
+type ItemPropertyValue struct {
+	*PropertyValue
+
+	ItemPropertyID int64 `xml:"ItemPropertyID,omitempty"`
+}
+
+type DiscountCard struct {
+	*DiscountCardRef
+
+	DiscountCardGroups *ArrayOfDiscountCardGroup `xml:"DiscountCardGroups,omitempty"`
+
+	IsDeleted bool `xml:"IsDeleted,omitempty"`
+}
+
+type DiscountCardRef struct {
+	ActivationDate time.Time `xml:"ActivationDate,omitempty"`
+
+	CustomerName string `xml:"CustomerName,omitempty"`
+
+	DiscountCardGroupIds *ArrayOfint `xml:"DiscountCardGroupIds,omitempty"`
+
+	DiscountCardID int64 `xml:"DiscountCardID,omitempty"`
+
+	ExpirationDate time.Time `xml:"ExpirationDate,omitempty"`
+
+	IsActive bool `xml:"IsActive,omitempty"`
+
+	IsBlocked bool `xml:"IsBlocked,omitempty"`
+
+	IsVirtual bool `xml:"IsVirtual,omitempty"`
+
+	Number string `xml:"Number,omitempty"`
+
+	PinCode string `xml:"PinCode,omitempty"`
+
+	ReasonBlocking string `xml:"ReasonBlocking,omitempty"`
+
+	StoreName string `xml:"StoreName,omitempty"`
+}
+
+type ArrayOfDiscountCardGroup struct {
+	DiscountCardGroup []*DiscountCardGroup `xml:"DiscountCardGroup,omitempty"`
+}
+
+type DiscountCardGroup struct {
+	CanAccrualBonuses bool `xml:"CanAccrualBonuses,omitempty"`
+
+	CanPayBonuses bool `xml:"CanPayBonuses,omitempty"`
+
+	DiscountCardGroupID int64 `xml:"DiscountCardGroupID,omitempty"`
+
+	Name string `xml:"Name,omitempty"`
+}
+
+type ArrayOfDiscountCard struct {
+	DiscountCard []*DiscountCard `xml:"DiscountCard,omitempty"`
+}
+
+type CanBindCardDTO struct {
+	CanBind bool `xml:"CanBind,omitempty"`
+
+	Error string `xml:"Error,omitempty"`
+
+	NeedAmountEnter bool `xml:"NeedAmountEnter,omitempty"`
+
+	NeedBlockExistingActiveCard bool `xml:"NeedBlockExistingActiveCard,omitempty"`
+
+	NeedPinEnter bool `xml:"NeedPinEnter,omitempty"`
+}
+
+type ArrayOfProperty struct {
+	Property []*Property `xml:"Property,omitempty"`
+}
+
+type Customer struct {
+	*CustomerRef
+
+	Categories *ArrayOfCategory `xml:"Categories,omitempty"`
+
+	IsAddedBonusForMobileRegistration bool `xml:"IsAddedBonusForMobileRegistration,omitempty"`
+
+	IsAddedBonusForRegistration bool `xml:"IsAddedBonusForRegistration,omitempty"`
+
+	IsDeleted bool `xml:"IsDeleted,omitempty"`
+
+	IsFillAllProperties bool `xml:"IsFillAllProperties,omitempty"`
+
+	PhoneIsChecked bool `xml:"PhoneIsChecked,omitempty"`
+
+	Properties *ArrayOfCustomerPropertyValue `xml:"Properties,omitempty"`
+}
+
+type CustomerRef struct {
+	AdministrativeAreaID int64 `xml:"AdministrativeAreaID,omitempty"`
+
+	CategoriesIds *ArrayOfint `xml:"CategoriesIds,omitempty"`
+
+	CustomerID int64 `xml:"CustomerID,omitempty"`
+
+	FirstName string `xml:"FirstName,omitempty"`
+
+	FullName string `xml:"FullName,omitempty"`
+
+	IsSmsSubscribed bool `xml:"IsSmsSubscribed,omitempty"`
+
+	IsSubscribed bool `xml:"IsSubscribed,omitempty"`
+
+	LastName string `xml:"LastName,omitempty"`
+
+	LocalityID int64 `xml:"LocalityID,omitempty"`
+
+	SecondName string `xml:"SecondName,omitempty"`
+}
+
+type ArrayOfCategory struct {
+	Category []*Category `xml:"Category,omitempty"`
+}
+
+type Category struct {
+	CategoryID int64 `xml:"CategoryID,omitempty"`
+
+	Color string `xml:"Color,omitempty"`
+
+	IsDeleted bool `xml:"IsDeleted,omitempty"`
+
+	Name string `xml:"Name,omitempty"`
+}
+
+type ArrayOfIndicator struct {
+	Indicator []*Indicator `xml:"Indicator,omitempty"`
+}
+
+type Indicator struct {
+	BonusAmount float64 `xml:"BonusAmount,omitempty"`
+
+	Company *Company `xml:"Company,omitempty"`
+
+	IndicatorID int64 `xml:"IndicatorID,omitempty"`
+
+	PayBonuses float64 `xml:"PayBonuses,omitempty"`
+
+	SavedByDiscount float64 `xml:"SavedByDiscount,omitempty"`
+
+	SavedByPayBonus float64 `xml:"SavedByPayBonus,omitempty"`
+}
+
+type Company struct {
+	AboutText string `xml:"AboutText,omitempty"`
+
+	BonusRate float64 `xml:"BonusRate,omitempty"`
+
+	CompanyID int64 `xml:"CompanyID,omitempty"`
+
+	CompanyUID string `xml:"CompanyUID,omitempty"`
+
+	CurrencySign string `xml:"CurrencySign,omitempty"`
+
+	DiscountAccuracy int32 `xml:"DiscountAccuracy,omitempty"`
+
+	ItemFavoriteCategoryCount int32 `xml:"ItemFavoriteCategoryCount,omitempty"`
+
+	Name string `xml:"Name,omitempty"`
+
+	TermsOfUseText string `xml:"TermsOfUseText,omitempty"`
+}
+
+type ArrayOfChipsDTO struct {
+	ChipsDTO []*ChipsDTO `xml:"ChipsDTO,omitempty"`
+}
+
+type ChipsDTO struct {
+	CompanyID int64 `xml:"CompanyID,omitempty"`
+
+	ID int64 `xml:"ID,omitempty"`
+
+	Name string `xml:"Name,omitempty"`
+
+	Quantity int32 `xml:"Quantity,omitempty"`
+
+	Text string `xml:"Text,omitempty"`
+}
+
+type ArrayOfRetirementDataDTO struct {
+	RetirementDataDTO []*RetirementDataDTO `xml:"RetirementDataDTO,omitempty"`
+}
+
+type RetirementDataDTO struct {
+	Bonus float64 `xml:"Bonus,omitempty"`
+
+	Company *Company `xml:"Company,omitempty"`
+
+	RetirementDate time.Time `xml:"RetirementDate,omitempty"`
+
+	RetirementText string `xml:"RetirementText,omitempty"`
+}
+
+type ArrayOfCheque struct {
+	Cheque []*Cheque `xml:"Cheque,omitempty"`
+}
+
+type Cheque struct {
+	AccrualBonus float64 `xml:"AccrualBonus,omitempty"`
+
+	Amount float64 `xml:"Amount,omitempty"`
+
+	ChequeID int64 `xml:"ChequeID,omitempty"`
+
+	ChequeLines *ArrayOfChequeLine `xml:"ChequeLines,omitempty"`
+
+	ChequeType *ChequeType `xml:"ChequeType,omitempty"`
+
+	ChequeUID string `xml:"ChequeUID,omitempty"`
+
+	DiscountCard *DiscountCard `xml:"DiscountCard,omitempty"`
+
+	Discounts *ArrayOfChequeDiscount `xml:"Discounts,omitempty"`
+
+	IsDeleted bool `xml:"IsDeleted,omitempty"`
+
+	PositionCount int32 `xml:"PositionCount,omitempty"`
+
+	StoreID int64 `xml:"StoreID,omitempty"`
+
+	StoreName string `xml:"StoreName,omitempty"`
+
+	SubtractedBonus float64 `xml:"SubtractedBonus,omitempty"`
+
+	Time time.Time `xml:"Time,omitempty"`
+}
+
+type ArrayOfChequeLine struct {
+	ChequeLine []*ChequeLine `xml:"ChequeLine,omitempty"`
+}
+
+type ChequeLine struct {
+	Amount float64 `xml:"Amount,omitempty"`
+
+	ChequeLineID int64 `xml:"ChequeLineID,omitempty"`
+
+	IsDeleted bool `xml:"IsDeleted,omitempty"`
+
+	Item *ItemRef `xml:"Item,omitempty"`
+
+	Price float64 `xml:"Price,omitempty"`
+
+	Quantity float64 `xml:"Quantity,omitempty"`
+}
+
+type ItemRef struct {
+	Articul string `xml:"Articul,omitempty"`
+
+	CategoriesIds *ArrayOfint `xml:"CategoriesIds,omitempty"`
+
+	ItemGroup *ItemGroupRef `xml:"ItemGroup,omitempty"`
+
+	ItemID int64 `xml:"ItemID,omitempty"`
+
+	LoadDate time.Time `xml:"LoadDate,omitempty"`
+
+	Name string `xml:"Name,omitempty"`
+
+	NoAddBonus bool `xml:"NoAddBonus,omitempty"`
+
+	NoDiscounts bool `xml:"NoDiscounts,omitempty"`
+
+	NoPayBonus bool `xml:"NoPayBonus,omitempty"`
+
+	PropertyValues *ArrayOfKeyValueOfintanyType `xml:"PropertyValues,omitempty"`
+}
+
+type ItemGroupRef struct {
+	FullName string `xml:"FullName,omitempty"`
+
+	ItemGroupID int64 `xml:"ItemGroupID,omitempty"`
+
+	Name string `xml:"Name,omitempty"`
+}
+
+type ItemGroup struct {
+	*ItemGroupRef
+
+	Company *Company `xml:"Company,omitempty"`
+
+	IsDeleted bool `xml:"IsDeleted,omitempty"`
+
+	LoadDate time.Time `xml:"LoadDate,omitempty"`
+
+	ParentItemGroup *ItemGroup `xml:"ParentItemGroup,omitempty"`
+}
+
+type Item struct {
+	*ItemRef
+
+	Categories *ArrayOfItemCategory `xml:"Categories,omitempty"`
+
+	Company *Company `xml:"Company,omitempty"`
+
+	IsDeleted bool `xml:"IsDeleted,omitempty"`
+
+	ItemUID string `xml:"ItemUID,omitempty"`
+
+	Properties *ArrayOfItemPropertyValue `xml:"Properties,omitempty"`
+}
+
+type ArrayOfItemCategory struct {
+	ItemCategory []*ItemCategory `xml:"ItemCategory,omitempty"`
+}
+
+type ItemCategory struct {
+	*ItemCategoryRef
+
+	Company *Company `xml:"Company,omitempty"`
+
+	IsDeleted bool `xml:"IsDeleted,omitempty"`
+}
+
+type ItemCategoryRef struct {
+	Color string `xml:"Color,omitempty"`
+
+	ItemCategoryID int64 `xml:"ItemCategoryID,omitempty"`
+
+	Name string `xml:"Name,omitempty"`
+}
+
+type ArrayOfItemPropertyValue struct {
+	ItemPropertyValue []*ItemPropertyValue `xml:"ItemPropertyValue,omitempty"`
+}
+
+type ArrayOfChequeDiscount struct {
+	ChequeDiscount []*ChequeDiscount `xml:"ChequeDiscount,omitempty"`
+}
+
+type ChequeDiscount struct {
+	Amount float64 `xml:"Amount,omitempty"`
+
+	ChequeDiscountID int64 `xml:"ChequeDiscountID,omitempty"`
+
+	ChequeLine *ChequeLine `xml:"ChequeLine,omitempty"`
+
+	DiscountType *DiscountType `xml:"DiscountType,omitempty"`
+}
+
+type ArrayOfTransaction struct {
+	Transaction []*Transaction `xml:"Transaction,omitempty"`
+}
+
+type Transaction struct {
+	AccrualAmount float64 `xml:"AccrualAmount,omitempty"`
+
+	AccrualBonus float64 `xml:"AccrualBonus,omitempty"`
+
+	AccrualVisit int32 `xml:"AccrualVisit,omitempty"`
+
+	ChequeType *ChequeType `xml:"ChequeType,omitempty"`
+
+	CompanyName string `xml:"CompanyName,omitempty"`
+
+	DelayUntil time.Time `xml:"DelayUntil,omitempty"`
+
+	DiscountCardID int32 `xml:"DiscountCardID,omitempty"`
+
+	DiscountCardNumber string `xml:"DiscountCardNumber,omitempty"`
+
+	RelatedTransactionID int64 `xml:"RelatedTransactionID,omitempty"`
+
+	TransactionID int64 `xml:"TransactionID,omitempty"`
+
+	TransactionTime time.Time `xml:"TransactionTime,omitempty"`
+
+	TransactionType *TransactionType `xml:"TransactionType,omitempty"`
+
+	ValidUntil time.Time `xml:"ValidUntil,omitempty"`
+}
+
+type ArrayOfMailingToCustomer struct {
+	MailingToCustomer []*MailingToCustomer `xml:"MailingToCustomer,omitempty"`
+}
+
+type MailingToCustomer struct {
+	DateAdded time.Time `xml:"DateAdded,omitempty"`
+
+	IsRead bool `xml:"IsRead,omitempty"`
+
+	MailingToCustomerID int64 `xml:"MailingToCustomerID,omitempty"`
+
+	Message string `xml:"Message,omitempty"`
+
+	SendTime time.Time `xml:"SendTime,omitempty"`
+
+	Subject string `xml:"Subject,omitempty"`
+}
+
+type Account struct {
+	AccountID int64 `xml:"AccountID,omitempty"`
+
+	Customer *CustomerRef `xml:"Customer,omitempty"`
+}
+
+type Mailing struct {
+	Company *Company `xml:"Company,omitempty"`
+
+	Date time.Time `xml:"Date,omitempty"`
+
+	DateEnd time.Time `xml:"DateEnd,omitempty"`
+
+	IsActive bool `xml:"IsActive,omitempty"`
+
+	IsDeleted bool `xml:"IsDeleted,omitempty"`
+
+	IsExpired bool `xml:"IsExpired,omitempty"`
+
+	MailingID int64 `xml:"MailingID,omitempty"`
+
+	MessageSubjectTemplate string `xml:"MessageSubjectTemplate,omitempty"`
+
+	MessageTemplate string `xml:"MessageTemplate,omitempty"`
+
+	Name string `xml:"Name,omitempty"`
+
+	Type *MailingType `xml:"Type,omitempty"`
+
+	TypeOfSending *TypeOfSending `xml:"TypeOfSending,omitempty"`
+}
+
+type ArrayOfItemFavoriteCategory struct {
+	ItemFavoriteCategory []*ItemFavoriteCategory `xml:"ItemFavoriteCategory,omitempty"`
+}
+
+type ItemFavoriteCategory struct {
+	Company *Company `xml:"Company,omitempty"`
+
+	DateAdd time.Time `xml:"DateAdd,omitempty"`
+
+	Description string `xml:"Description,omitempty"`
+
+	IsSelected bool `xml:"IsSelected,omitempty"`
+
+	ItemFavoriteCategoryID int64 `xml:"ItemFavoriteCategoryID,omitempty"`
+
+	Name string `xml:"Name,omitempty"`
+
+	Position int32 `xml:"Position,omitempty"`
+}
+
+type ArrayOfLoyaltySettingDTO struct {
+	LoyaltySettingDTO []*LoyaltySettingDTO `xml:"LoyaltySettingDTO,omitempty"`
+}
+
+type LoyaltySettingDTO struct {
+	KeyValue string `xml:"KeyValue,omitempty"`
+
+	LoyaltySettingID int64 `xml:"LoyaltySettingID,omitempty"`
+
+	Type *SettingTypes `xml:"Type,omitempty"`
+
+	Value string `xml:"Value,omitempty"`
+}
+
+type ArrayOfStore struct {
+	Store []*Store `xml:"Store,omitempty"`
+}
+
+type Store struct {
+	Address string `xml:"Address,omitempty"`
+
+	AdministrativeAreaID int64 `xml:"AdministrativeAreaID,omitempty"`
+
+	CompanyID int64 `xml:"CompanyID,omitempty"`
+
+	GeoCoordX float64 `xml:"GeoCoordX,omitempty"`
+
+	GeoCoordY float64 `xml:"GeoCoordY,omitempty"`
+
+	IsClosed bool `xml:"IsClosed,omitempty"`
+
+	Name string `xml:"Name,omitempty"`
+
+	OperatingMode string `xml:"OperatingMode,omitempty"`
+
+	Properties *ArrayOfTupleOflongstringstring `xml:"Properties,omitempty"`
+
+	StoreID int64 `xml:"StoreID,omitempty"`
+}
+
+type ArrayOfStorePropertyValue struct {
+	StorePropertyValue []*StorePropertyValue `xml:"StorePropertyValue,omitempty"`
+}
+
+type ArrayOfCompany struct {
+	Company []*Company `xml:"Company,omitempty"`
+}
+
+type ArrayOfAdministrativeAreaDTO struct {
+	AdministrativeAreaDTO []*AdministrativeAreaDTO `xml:"AdministrativeAreaDTO,omitempty"`
+}
+
+type AdministrativeAreaDTO struct {
+	AdministrativeAreaID int64 `xml:"AdministrativeAreaID,omitempty"`
+
+	CompanyID int64 `xml:"CompanyID,omitempty"`
+
+	Name string `xml:"Name,omitempty"`
+}
+
+type ArrayOfLocalityDTO struct {
+	LocalityDTO []*LocalityDTO `xml:"LocalityDTO,omitempty"`
+}
+
+type LocalityDTO struct {
+	AdministrativeAreaID int64 `xml:"AdministrativeAreaID,omitempty"`
+
+	LocalityId int64 `xml:"LocalityId,omitempty"`
+
+	Name string `xml:"Name,omitempty"`
+}
+
+type ArrayOfAboutDTO struct {
+	AboutDTO []*AboutDTO `xml:"AboutDTO,omitempty"`
+}
+
+type AboutDTO struct {
+	CompanyAbout string `xml:"CompanyAbout,omitempty"`
+
+	CompanyID int64 `xml:"CompanyID,omitempty"`
+
+	CompanyName string `xml:"CompanyName,omitempty"`
+}
+
+type ObjectType string
+
+const (
+	ObjectTypeCustomer ObjectType = "Customer"
+
+	ObjectTypeItem ObjectType = "Item"
+
+	ObjectTypeStore ObjectType = "Store"
+)
+
+type PropertyType string
+
+const (
+	PropertyTypeInteger PropertyType = "Integer"
+
+	PropertyTypeString PropertyType = "String"
+
+	PropertyTypeDate PropertyType = "Date"
+
+	PropertyTypeEnum PropertyType = "Enum"
+
+	PropertyTypeBoolean PropertyType = "Boolean"
+
+	PropertyTypeEnumMultiple PropertyType = "EnumMultiple"
+)
+
+type PresetPropertyType string
+
+const (
+	PresetPropertyTypeREGION PresetPropertyType = "REGION"
+
+	PresetPropertyTypeCITY PresetPropertyType = "CITY"
+
+	PresetPropertyTypePHONE PresetPropertyType = "PHONE"
+
+	PresetPropertyTypeEMAIL PresetPropertyType = "EMAIL"
+
+	PresetPropertyTypeGENDER PresetPropertyType = "GENDER"
+
+	PresetPropertyTypeDOB PresetPropertyType = "DOB"
+
+	PresetPropertyTypeMODE PresetPropertyType = "MODE"
+)
+
+type UserEditType string
+
+const (
+	UserEditTypePrivate UserEditType = "Private"
+
+	UserEditTypeCanEdit UserEditType = "CanEdit"
+
+	UserEditTypeReadOnly UserEditType = "ReadOnly"
+
+	UserEditTypeEditOne UserEditType = "EditOne"
+)
+
+type TransactionType string
+
+const (
+	TransactionTypeCHQ TransactionType = "CHQ"
+
+	TransactionTypeBNS TransactionType = "BNS"
+
+	TransactionTypeRTM TransactionType = "RTM"
+
+	TransactionTypeDEC TransactionType = "DEC"
+
+	TransactionTypeFIX TransactionType = "FIX"
+
+	TransactionTypeGFT TransactionType = "GFT"
+)
+
+type MailingType string
+
+const (
+	MailingTypeDATE MailingType = "DATE"
+
+	MailingTypeCHEQUE MailingType = "CHEQUE"
+
+	MailingTypeINTER MailingType = "INTER"
+)
+
+type TypeOfSending string
+
+const (
+	TypeOfSendingSMS TypeOfSending = "SMS"
+
+	TypeOfSendingEMAIL TypeOfSending = "EMAIL"
+
+	TypeOfSendingPORTAL TypeOfSending = "PORTAL"
+)
+
+type CouponUseType string
+
+const (
+	CouponUseTypePrivate CouponUseType = "Private"
+
+	CouponUseTypePublic CouponUseType = "Public"
+)
+
+type ValidityPeriodType string
+
+const (
+	ValidityPeriodTypeDays ValidityPeriodType = "Days"
+
+	ValidityPeriodTypeMonths ValidityPeriodType = "Months"
+)
+
+type SettingTypes string
+
+const (
+	SettingTypesBoolean SettingTypes = "Boolean"
+
+	SettingTypesString SettingTypes = "String"
+
+	SettingTypesInt SettingTypes = "Int"
+
+	SettingTypesDecimal SettingTypes = "Decimal"
+
+	SettingTypesDateTime SettingTypes = "DateTime"
+
+	SettingTypesPropertyCustomer SettingTypes = "PropertyCustomer"
+
+	SettingTypesPropertyStore SettingTypes = "PropertyStore"
+
+	SettingTypesMailing SettingTypes = "Mailing"
+
+	SettingTypesCoupon SettingTypes = "Coupon"
+
+	SettingTypesCategory SettingTypes = "Category"
+
+	SettingTypesArray SettingTypes = "Array"
+)
+
+type ColorType string
+
+const (
+	ColorTypeBlue ColorType = "blue"
+
+	ColorTypeRed ColorType = "red"
+
+	ColorTypeDarkOrange ColorType = "darkOrange"
+
+	ColorTypeNight ColorType = "night"
+
+	ColorTypeDarkBlue ColorType = "darkBlue"
+
+	ColorTypePink ColorType = "pink"
+
+	ColorTypeGray ColorType = "gray"
+
+	ColorTypeBrown ColorType = "brown"
+
+	ColorTypeDarkGreen ColorType = "darkGreen"
+
+	ColorTypeViolet ColorType = "violet"
+
+	ColorTypeBlack ColorType = "black"
+
+	ColorTypeYellow ColorType = "yellow"
+
+	ColorTypeGreen ColorType = "green"
+
+	ColorTypeOrange ColorType = "orange"
+
+	ColorTypeLightBlue ColorType = "lightBlue"
+
+	ColorTypeOlive ColorType = "olive"
+)
+
+type RegistrationBotProtectionType string
+
+const (
+	RegistrationBotProtectionTypeNone RegistrationBotProtectionType = "None"
+
+	RegistrationBotProtectionTypeSms RegistrationBotProtectionType = "Sms"
+
+	RegistrationBotProtectionTypeCapcha RegistrationBotProtectionType = "Capcha"
+
+	RegistrationBotProtectionTypeBackgroundCapcha RegistrationBotProtectionType = "BackgroundCapcha"
+)
+
+type ArrayOfKeyValueOflongboolean struct {
+	KeyValueOflongboolean []struct {
+		Key int64 `xml:"Key,omitempty"`
+
+		Value bool `xml:"Value,omitempty"`
+	} `xml:"KeyValueOflongboolean,omitempty"`
+}
+
+type ArrayOfint struct {
+	Int []int32 `xml:"int,omitempty"`
+}
+
+type ArrayOflong struct {
+	Long []int64 `xml:"long,omitempty"`
+}
+
+type ArrayOfstring struct {
+	String []string `xml:"string,omitempty"`
+}
+
+type ArrayOfKeyValueOfintanyType struct {
+	KeyValueOfintanyType []struct {
+		Key int32 `xml:"Key,omitempty"`
+
+		Value interface{} `xml:"Value,omitempty"`
+	} `xml:"KeyValueOfintanyType,omitempty"`
+}
+
+type ArrayOfKeyValueOfstringstring struct {
+	KeyValueOfstringstring []struct {
+		Key string `xml:"Key,omitempty"`
+
+		Value string `xml:"Value,omitempty"`
+	} `xml:"KeyValueOfstringstring,omitempty"`
+}
+
+type ArrayOfKeyValueOflongNullableOfdateTimeU6ho3Bhd struct {
+	KeyValueOflongNullableOfdateTimeU6ho3Bhd []struct {
+		Key int64 `xml:"Key,omitempty"`
+
+		Value time.Time `xml:"Value,omitempty"`
+	} `xml:"KeyValueOflongNullableOfdateTimeU6ho3Bhd,omitempty"`
+}
+
+type ChequeType string
+
+const (
+	ChequeTypeSale ChequeType = "Sale"
+
+	ChequeTypeReturn ChequeType = "Return"
+)
+
+type DiscountType string
+
+const (
+	DiscountTypePercent DiscountType = "Percent"
+
+	DiscountTypeAmount DiscountType = "Amount"
+
+	DiscountTypeTender DiscountType = "Tender"
+
+	DiscountTypeFixPrice DiscountType = "FixPrice"
+)
+
+type ArrayOfCoupon struct {
+	Coupon []*Coupon `xml:"Coupon,omitempty"`
+}
+
+type Coupon struct {
+	CouponID int64 `xml:"CouponID,omitempty"`
+
+	CouponType string `xml:"CouponType,omitempty"`
+
+	IsExpired bool `xml:"IsExpired,omitempty"`
+
+	IsTemplate bool `xml:"IsTemplate,omitempty"`
+
+	Number string `xml:"Number,omitempty"`
+}
+
+type NonUniqueCoupon struct {
+	*Coupon
+
+	MessageTemplate string `xml:"MessageTemplate,omitempty"`
+
+	Name string `xml:"Name,omitempty"`
+}
+
+type NonUniqueItemCoupon struct {
+	*NonUniqueCoupon
+}
+
+type UniqueCoupon struct {
+	*Coupon
+
+	Account *Account `xml:"Account,omitempty"`
+
+	ActivationDate time.Time `xml:"ActivationDate,omitempty"`
+
+	ExpirationDate time.Time `xml:"ExpirationDate,omitempty"`
+
+	IsUsed bool `xml:"IsUsed,omitempty"`
+
+	TemplateCoupon *Coupon `xml:"TemplateCoupon,omitempty"`
+}
+
+type UniqueItemCoupon struct {
+	*UniqueCoupon
+}
+
+type UniqueCouponTemplate struct {
+	*Coupon
+
+	IssuedCountCalc int32 `xml:"IssuedCountCalc,omitempty"`
+
+	Mailing *Mailing `xml:"Mailing,omitempty"`
+
+	Mailing2 *Mailing `xml:"Mailing2,omitempty"`
+
+	Mailing3 *Mailing `xml:"Mailing3,omitempty"`
+
+	MaxCount int32 `xml:"MaxCount,omitempty"`
+
+	MessageTemplate string `xml:"MessageTemplate,omitempty"`
+
+	TemplateName string `xml:"TemplateName,omitempty"`
+
+	UseType *CouponUseType `xml:"UseType,omitempty"`
+
+	UsedCountCalc int32 `xml:"UsedCountCalc,omitempty"`
+
+	ValidityPeriod int32 `xml:"ValidityPeriod,omitempty"`
+
+	ValidityPeriodType *ValidityPeriodType `xml:"ValidityPeriodType,omitempty"`
+}
+
+type UniqueItemCouponTemplate struct {
+	*UniqueCouponTemplate
+}
+
+type NonUniquePromoCode struct {
+	*Coupon
+
+	CustomerCategory *Category `xml:"CustomerCategory,omitempty"`
+
+	ExpirationDate time.Time `xml:"ExpirationDate,omitempty"`
+
+	MaxCount int32 `xml:"MaxCount,omitempty"`
+
+	MessageTemplate string `xml:"MessageTemplate,omitempty"`
+
+	Name string `xml:"Name,omitempty"`
+
+	UsedCount int32 `xml:"UsedCount,omitempty"`
+}
+
+type UniquePromoCodeTemplate struct {
+	*Coupon
+
+	CustomerCategory *Category `xml:"CustomerCategory,omitempty"`
+
+	MaxCount int32 `xml:"MaxCount,omitempty"`
+
+	MessageTemplate string `xml:"MessageTemplate,omitempty"`
+
+	TemplateName string `xml:"TemplateName,omitempty"`
+
+	UsedCountCalc int32 `xml:"UsedCountCalc,omitempty"`
+
+	ValidityPeriod int32 `xml:"ValidityPeriod,omitempty"`
+
+	ValidityPeriodType *ValidityPeriodType `xml:"ValidityPeriodType,omitempty"`
+}
+
+type UniquePromoCode struct {
+	*Coupon
+
+	Account *Account `xml:"Account,omitempty"`
+
+	ActivationDate time.Time `xml:"ActivationDate,omitempty"`
+
+	ExpirationDate time.Time `xml:"ExpirationDate,omitempty"`
+
+	IsIssued bool `xml:"IsIssued,omitempty"`
+
+	IsUsed bool `xml:"IsUsed,omitempty"`
+
+	TemplatePromoCode *UniquePromoCodeTemplate `xml:"TemplatePromoCode,omitempty"`
+}
+
+type ArrayOfTupleOflongstringstring struct {
+	TupleOflongstringstring []*TupleOflongstringstring `xml:"TupleOflongstringstring,omitempty"`
+}
+
+type TupleOflongstringstring struct {
+	M_Item1 int64 `xml:"m_Item1,omitempty"`
+
+	M_Item2 string `xml:"m_Item2,omitempty"`
+
+	M_Item3 string `xml:"m_Item3,omitempty"`
+}
+
+type IRSLoyaltyClientService interface {
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	GetTokenByType(request *GetTokenByType) (*GetTokenByTypeResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	GetTokenByLogin(request *GetTokenByLogin) (*GetTokenByLoginResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	GetTokenByCard(request *GetTokenByCard) (*GetTokenByCardResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	GetTokenByEmail(request *GetTokenByEmail) (*GetTokenByEmailResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	GetTokenByPhone(request *GetTokenByPhone) (*GetTokenByPhoneResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	SendLogOnCode(request *SendLogOnCode) (*SendLogOnCodeResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	SendTwoPhaseLogOnCode(request *SendTwoPhaseLogOnCode) (*SendTwoPhaseLogOnCodeResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	ValidateByToken(request *ValidateByToken) (*ValidateByTokenResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	ActivateClientService(request *ActivateClientService) (*ActivateClientServiceResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	CanActivateCustomer(request *CanActivateCustomer) (*CanActivateCustomerResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	GetCustomerRegisterData(request *GetCustomerRegisterData) (*GetCustomerRegisterDataResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	CheckRegistarionData(request *CheckRegistarionData) (*CheckRegistarionDataResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	GetCustomerRegistrationDataByPhone(request *GetCustomerRegistrationDataByPhone) (*GetCustomerRegistrationDataByPhoneResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	GetActivateCardType(request *GetActivateCardType) (*GetActivateCardTypeResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	GetDiscountCardById(request *GetDiscountCardById) (*GetDiscountCardByIdResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	GetDiscountCards(request *GetDiscountCards) (*GetDiscountCardsResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	GetPhoneDiscountCards(request *GetPhoneDiscountCards) (*GetPhoneDiscountCardsResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	BindDiscountCardToCustomer(request *BindDiscountCardToCustomer) (*BindDiscountCardToCustomerResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	BindDiscountCardToPhone(request *BindDiscountCardToPhone) (*BindDiscountCardToPhoneResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	CanBindDiscountCard(request *CanBindDiscountCard) (*CanBindDiscountCardResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	BindVirtualDiscountCardToCustomer(request *BindVirtualDiscountCardToCustomer) (*BindVirtualDiscountCardToCustomerResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	BlockCard(request *BlockCard) (*BlockCardResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	BlockCardByPhone(request *BlockCardByPhone) (*BlockCardByPhoneResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	GetDiscountCard(request *GetDiscountCard) (*GetDiscountCardResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	HasDiscountCardPin(request *HasDiscountCardPin) (*HasDiscountCardPinResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	DiscountCardIsExist(request *DiscountCardIsExist) (*DiscountCardIsExistResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	DiscountCardIsVirtual(request *DiscountCardIsVirtual) (*DiscountCardIsVirtualResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	DiscountCardIsPersonalized(request *DiscountCardIsPersonalized) (*DiscountCardIsPersonalizedResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	HasFreeVirtualDiscountCards(request *HasFreeVirtualDiscountCards) (*HasFreeVirtualDiscountCardsResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	ActivateDiscountCard(request *ActivateDiscountCard) (*ActivateDiscountCardResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	GetCustomersProperties(request *GetCustomersProperties) (*GetCustomersPropertiesResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	GetCustomerData(request *GetCustomerData) (*GetCustomerDataResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	SaveCustomerData(request *SaveCustomerData) (*SaveCustomerDataResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	SaveCustomerPhone(request *SaveCustomerPhone) (*SaveCustomerPhoneResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	GetNotAcceptedTermsOfUsing(request *GetNotAcceptedTermsOfUsing) (*GetNotAcceptedTermsOfUsingResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	AcceptTermsOfUsing(request *AcceptTermsOfUsing) (*AcceptTermsOfUsingResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	GetIndicators(request *GetIndicators) (*GetIndicatorsResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	GetChips(request *GetChips) (*GetChipsResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	GetRetirementInfo(request *GetRetirementInfo) (*GetRetirementInfoResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	GetRetirementData(request *GetRetirementData) (*GetRetirementDataResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	GetOffers(request *GetOffers) (*GetOffersResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	GetAllOperations(request *GetAllOperations) (*GetAllOperationsResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	GetOperations(request *GetOperations) (*GetOperationsResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	GetAllUserTransactions(request *GetAllUserTransactions) (*GetAllUserTransactionsResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	GetUserTransactions(request *GetUserTransactions) (*GetUserTransactionsResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	GetRegistrationDate(request *GetRegistrationDate) (*GetRegistrationDateResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	GetMessages(request *GetMessages) (*GetMessagesResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	SetReadStatus(request *SetReadStatus) (*SetReadStatusResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	DeleteMessages(request *DeleteMessages) (*DeleteMessagesResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	GetUnreadMessagesCount(request *GetUnreadMessagesCount) (*GetUnreadMessagesCountResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	GetMessage(request *GetMessage) (*GetMessageResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	SendVerifyCode(request *SendVerifyCode) (*SendVerifyCodeResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	TestPhoneNumberVerifyCode(request *TestPhoneNumberVerifyCode) (*TestPhoneNumberVerifyCodeResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	CheckSavedPhoneIsVerified(request *CheckSavedPhoneIsVerified) (*CheckSavedPhoneIsVerifiedResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	SendCode(request *SendCode) (*SendCodeResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	TestCode(request *TestCode) (*TestCodeResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	GetCouponsMessages(request *GetCouponsMessages) (*GetCouponsMessagesResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	GetCouponOffers(request *GetCouponOffers) (*GetCouponOffersResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	UseCouponOffer(request *UseCouponOffer) (*UseCouponOfferResponse, error)
+
+	ChangePassword(request *ChangePassword) (*ChangePasswordResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	CheckUserToken(request *CheckUserToken) (*CheckUserTokenResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	SendForgetPasswordInfo(request *SendForgetPasswordInfo) (*SendForgetPasswordInfoResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	SendSmsForgetPasswordInfo(request *SendSmsForgetPasswordInfo) (*SendSmsForgetPasswordInfoResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	GetRestorePasswordData(request *GetRestorePasswordData) (*GetRestorePasswordDataResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	TestForgetPasswordVerifyCode(request *TestForgetPasswordVerifyCode) (*TestForgetPasswordVerifyCodeResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	GetItemFavoriteCategories(request *GetItemFavoriteCategories) (*GetItemFavoriteCategoriesResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	SaveCustomerFavoriteCategories(request *SaveCustomerFavoriteCategories) (*SaveCustomerFavoriteCategoriesResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	GetLastItemFavoriteCategoryChandgeDate(request *GetLastItemFavoriteCategoryChandgeDate) (*GetLastItemFavoriteCategoryChandgeDateResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	GetLastItemFavoriteCategoryChandgeDateByCompany(request *GetLastItemFavoriteCategoryChandgeDateByCompany) (*GetLastItemFavoriteCategoryChandgeDateByCompanyResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	GetFavoriteItemsExpiried(request *GetFavoriteItemsExpiried) (*GetFavoriteItemsExpiriedResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	GetLoyaltySettings(request *GetLoyaltySettings) (*GetLoyaltySettingsResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	GetStores(request *GetStores) (*GetStoresResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	GetStore(request *GetStore) (*GetStoreResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	GetStoreProperties(request *GetStoreProperties) (*GetStorePropertiesResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	GetStorePropertyValues(request *GetStorePropertyValues) (*GetStorePropertyValuesResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	GetCompanies(request *GetCompanies) (*GetCompaniesResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	GetAdministrativeAreas(request *GetAdministrativeAreas) (*GetAdministrativeAreasResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	GetLocalities(request *GetLocalities) (*GetLocalitiesResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	About(request *About) (*AboutResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	GetFakeColorType(request *GetFakeColorType) (*GetFakeColorTypeResponse, error)
+
+	// Error can be either of the following types:
+	//
+	//   - StringFault
+
+	GetFakeRegistrationBotProtectionType(request *GetFakeRegistrationBotProtectionType) (*GetFakeRegistrationBotProtectionTypeResponse, error)
+}
+
+type iRSLoyaltyClientService struct {
+	client *soap.Client
+}
+
+func NewIRSLoyaltyClientService(client *soap.Client) IRSLoyaltyClientService {
+	return &iRSLoyaltyClientService{
+		client: client,
+	}
+}
+
+func (service *iRSLoyaltyClientService) GetTokenByType(request *GetTokenByType) (*GetTokenByTypeResponse, error) {
+	response := new(GetTokenByTypeResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/GetTokenByType", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) GetTokenByLogin(request *GetTokenByLogin) (*GetTokenByLoginResponse, error) {
+	response := new(GetTokenByLoginResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/GetTokenByLogin", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) GetTokenByCard(request *GetTokenByCard) (*GetTokenByCardResponse, error) {
+	response := new(GetTokenByCardResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/GetTokenByCard", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) GetTokenByEmail(request *GetTokenByEmail) (*GetTokenByEmailResponse, error) {
+	response := new(GetTokenByEmailResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/GetTokenByEmail", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) GetTokenByPhone(request *GetTokenByPhone) (*GetTokenByPhoneResponse, error) {
+	response := new(GetTokenByPhoneResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/GetTokenByPhone", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) SendLogOnCode(request *SendLogOnCode) (*SendLogOnCodeResponse, error) {
+	response := new(SendLogOnCodeResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/SendLogOnCode", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) SendTwoPhaseLogOnCode(request *SendTwoPhaseLogOnCode) (*SendTwoPhaseLogOnCodeResponse, error) {
+	response := new(SendTwoPhaseLogOnCodeResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/SendTwoPhaseLogOnCode", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) ValidateByToken(request *ValidateByToken) (*ValidateByTokenResponse, error) {
+	response := new(ValidateByTokenResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/ValidateByToken", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) ActivateClientService(request *ActivateClientService) (*ActivateClientServiceResponse, error) {
+	response := new(ActivateClientServiceResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/ActivateClientService", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) CanActivateCustomer(request *CanActivateCustomer) (*CanActivateCustomerResponse, error) {
+	response := new(CanActivateCustomerResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/CanActivateCustomer", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) GetCustomerRegisterData(request *GetCustomerRegisterData) (*GetCustomerRegisterDataResponse, error) {
+	response := new(GetCustomerRegisterDataResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/GetCustomerRegisterData", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) CheckRegistarionData(request *CheckRegistarionData) (*CheckRegistarionDataResponse, error) {
+	response := new(CheckRegistarionDataResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/CheckRegistarionData", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) GetCustomerRegistrationDataByPhone(request *GetCustomerRegistrationDataByPhone) (*GetCustomerRegistrationDataByPhoneResponse, error) {
+	response := new(GetCustomerRegistrationDataByPhoneResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/GetCustomerRegistrationDataByPhone", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) GetActivateCardType(request *GetActivateCardType) (*GetActivateCardTypeResponse, error) {
+	response := new(GetActivateCardTypeResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/GetActivateCardType", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) GetDiscountCardById(request *GetDiscountCardById) (*GetDiscountCardByIdResponse, error) {
+	response := new(GetDiscountCardByIdResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/GetDiscountCardById", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) GetDiscountCards(request *GetDiscountCards) (*GetDiscountCardsResponse, error) {
+	response := new(GetDiscountCardsResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/GetDiscountCards", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) GetPhoneDiscountCards(request *GetPhoneDiscountCards) (*GetPhoneDiscountCardsResponse, error) {
+	response := new(GetPhoneDiscountCardsResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/GetPhoneDiscountCards", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) BindDiscountCardToCustomer(request *BindDiscountCardToCustomer) (*BindDiscountCardToCustomerResponse, error) {
+	response := new(BindDiscountCardToCustomerResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/BindDiscountCardToCustomer", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) BindDiscountCardToPhone(request *BindDiscountCardToPhone) (*BindDiscountCardToPhoneResponse, error) {
+	response := new(BindDiscountCardToPhoneResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/BindDiscountCardToPhone", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) CanBindDiscountCard(request *CanBindDiscountCard) (*CanBindDiscountCardResponse, error) {
+	response := new(CanBindDiscountCardResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/CanBindDiscountCard", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) BindVirtualDiscountCardToCustomer(request *BindVirtualDiscountCardToCustomer) (*BindVirtualDiscountCardToCustomerResponse, error) {
+	response := new(BindVirtualDiscountCardToCustomerResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/BindVirtualDiscountCardToCustomer", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) BlockCard(request *BlockCard) (*BlockCardResponse, error) {
+	response := new(BlockCardResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/BlockCard", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) BlockCardByPhone(request *BlockCardByPhone) (*BlockCardByPhoneResponse, error) {
+	response := new(BlockCardByPhoneResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/BlockCardByPhone", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) GetDiscountCard(request *GetDiscountCard) (*GetDiscountCardResponse, error) {
+	response := new(GetDiscountCardResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/GetDiscountCard", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) HasDiscountCardPin(request *HasDiscountCardPin) (*HasDiscountCardPinResponse, error) {
+	response := new(HasDiscountCardPinResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/HasDiscountCardPin", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) DiscountCardIsExist(request *DiscountCardIsExist) (*DiscountCardIsExistResponse, error) {
+	response := new(DiscountCardIsExistResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/DiscountCardIsExist", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) DiscountCardIsVirtual(request *DiscountCardIsVirtual) (*DiscountCardIsVirtualResponse, error) {
+	response := new(DiscountCardIsVirtualResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/DiscountCardIsVirtual", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) DiscountCardIsPersonalized(request *DiscountCardIsPersonalized) (*DiscountCardIsPersonalizedResponse, error) {
+	response := new(DiscountCardIsPersonalizedResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/DiscountCardIsPersonalized", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) HasFreeVirtualDiscountCards(request *HasFreeVirtualDiscountCards) (*HasFreeVirtualDiscountCardsResponse, error) {
+	response := new(HasFreeVirtualDiscountCardsResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/HasFreeVirtualDiscountCards", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) ActivateDiscountCard(request *ActivateDiscountCard) (*ActivateDiscountCardResponse, error) {
+	response := new(ActivateDiscountCardResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/ActivateDiscountCard", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) GetCustomersProperties(request *GetCustomersProperties) (*GetCustomersPropertiesResponse, error) {
+	response := new(GetCustomersPropertiesResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/GetCustomersProperties", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) GetCustomerData(request *GetCustomerData) (*GetCustomerDataResponse, error) {
+	response := new(GetCustomerDataResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/GetCustomerData", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) SaveCustomerData(request *SaveCustomerData) (*SaveCustomerDataResponse, error) {
+	response := new(SaveCustomerDataResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/SaveCustomerData", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) SaveCustomerPhone(request *SaveCustomerPhone) (*SaveCustomerPhoneResponse, error) {
+	response := new(SaveCustomerPhoneResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/SaveCustomerPhone", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) GetNotAcceptedTermsOfUsing(request *GetNotAcceptedTermsOfUsing) (*GetNotAcceptedTermsOfUsingResponse, error) {
+	response := new(GetNotAcceptedTermsOfUsingResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/GetNotAcceptedTermsOfUsing", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) AcceptTermsOfUsing(request *AcceptTermsOfUsing) (*AcceptTermsOfUsingResponse, error) {
+	response := new(AcceptTermsOfUsingResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/AcceptTermsOfUsing", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) GetIndicators(request *GetIndicators) (*GetIndicatorsResponse, error) {
+	response := new(GetIndicatorsResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/GetIndicators", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) GetChips(request *GetChips) (*GetChipsResponse, error) {
+	response := new(GetChipsResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/GetChips", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) GetRetirementInfo(request *GetRetirementInfo) (*GetRetirementInfoResponse, error) {
+	response := new(GetRetirementInfoResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/GetRetirementInfo", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) GetRetirementData(request *GetRetirementData) (*GetRetirementDataResponse, error) {
+	response := new(GetRetirementDataResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/GetRetirementData", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) GetOffers(request *GetOffers) (*GetOffersResponse, error) {
+	response := new(GetOffersResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/GetOffers", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) GetAllOperations(request *GetAllOperations) (*GetAllOperationsResponse, error) {
+	response := new(GetAllOperationsResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/GetAllOperations", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) GetOperations(request *GetOperations) (*GetOperationsResponse, error) {
+	response := new(GetOperationsResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/GetOperations", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) GetAllUserTransactions(request *GetAllUserTransactions) (*GetAllUserTransactionsResponse, error) {
+	response := new(GetAllUserTransactionsResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/GetAllUserTransactions", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) GetUserTransactions(request *GetUserTransactions) (*GetUserTransactionsResponse, error) {
+	response := new(GetUserTransactionsResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/GetUserTransactions", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) GetRegistrationDate(request *GetRegistrationDate) (*GetRegistrationDateResponse, error) {
+	response := new(GetRegistrationDateResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/GetRegistrationDate", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) GetMessages(request *GetMessages) (*GetMessagesResponse, error) {
+	response := new(GetMessagesResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/GetMessages", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) SetReadStatus(request *SetReadStatus) (*SetReadStatusResponse, error) {
+	response := new(SetReadStatusResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/SetReadStatus", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) DeleteMessages(request *DeleteMessages) (*DeleteMessagesResponse, error) {
+	response := new(DeleteMessagesResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/DeleteMessages", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) GetUnreadMessagesCount(request *GetUnreadMessagesCount) (*GetUnreadMessagesCountResponse, error) {
+	response := new(GetUnreadMessagesCountResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/GetUnreadMessagesCount", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) GetMessage(request *GetMessage) (*GetMessageResponse, error) {
+	response := new(GetMessageResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/GetMessage", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) SendVerifyCode(request *SendVerifyCode) (*SendVerifyCodeResponse, error) {
+	response := new(SendVerifyCodeResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/SendVerifyCode", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) TestPhoneNumberVerifyCode(request *TestPhoneNumberVerifyCode) (*TestPhoneNumberVerifyCodeResponse, error) {
+	response := new(TestPhoneNumberVerifyCodeResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/TestPhoneNumberVerifyCode", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) CheckSavedPhoneIsVerified(request *CheckSavedPhoneIsVerified) (*CheckSavedPhoneIsVerifiedResponse, error) {
+	response := new(CheckSavedPhoneIsVerifiedResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/CheckSavedPhoneIsVerified", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) SendCode(request *SendCode) (*SendCodeResponse, error) {
+	response := new(SendCodeResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/SendCode", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) TestCode(request *TestCode) (*TestCodeResponse, error) {
+	response := new(TestCodeResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/TestCode", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) GetCouponsMessages(request *GetCouponsMessages) (*GetCouponsMessagesResponse, error) {
+	response := new(GetCouponsMessagesResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/GetCouponsMessages", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) GetCouponOffers(request *GetCouponOffers) (*GetCouponOffersResponse, error) {
+	response := new(GetCouponOffersResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/GetCouponOffers", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) UseCouponOffer(request *UseCouponOffer) (*UseCouponOfferResponse, error) {
+	response := new(UseCouponOfferResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/UseCouponOffer", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) ChangePassword(request *ChangePassword) (*ChangePasswordResponse, error) {
+	response := new(ChangePasswordResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/ChangePassword", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) CheckUserToken(request *CheckUserToken) (*CheckUserTokenResponse, error) {
+	response := new(CheckUserTokenResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/CheckUserToken", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) SendForgetPasswordInfo(request *SendForgetPasswordInfo) (*SendForgetPasswordInfoResponse, error) {
+	response := new(SendForgetPasswordInfoResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/SendForgetPasswordInfo", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) SendSmsForgetPasswordInfo(request *SendSmsForgetPasswordInfo) (*SendSmsForgetPasswordInfoResponse, error) {
+	response := new(SendSmsForgetPasswordInfoResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/SendSmsForgetPasswordInfo", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) GetRestorePasswordData(request *GetRestorePasswordData) (*GetRestorePasswordDataResponse, error) {
+	response := new(GetRestorePasswordDataResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/GetRestorePasswordData", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) TestForgetPasswordVerifyCode(request *TestForgetPasswordVerifyCode) (*TestForgetPasswordVerifyCodeResponse, error) {
+	response := new(TestForgetPasswordVerifyCodeResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/TestForgetPasswordVerifyCode", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) GetItemFavoriteCategories(request *GetItemFavoriteCategories) (*GetItemFavoriteCategoriesResponse, error) {
+	response := new(GetItemFavoriteCategoriesResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/GetItemFavoriteCategories", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) SaveCustomerFavoriteCategories(request *SaveCustomerFavoriteCategories) (*SaveCustomerFavoriteCategoriesResponse, error) {
+	response := new(SaveCustomerFavoriteCategoriesResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/SaveCustomerFavoriteCategories", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) GetLastItemFavoriteCategoryChandgeDate(request *GetLastItemFavoriteCategoryChandgeDate) (*GetLastItemFavoriteCategoryChandgeDateResponse, error) {
+	response := new(GetLastItemFavoriteCategoryChandgeDateResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/GetLastItemFavoriteCategoryChandgeDate", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) GetLastItemFavoriteCategoryChandgeDateByCompany(request *GetLastItemFavoriteCategoryChandgeDateByCompany) (*GetLastItemFavoriteCategoryChandgeDateByCompanyResponse, error) {
+	response := new(GetLastItemFavoriteCategoryChandgeDateByCompanyResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/GetLastItemFavoriteCategoryChandgeDateByCompany", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) GetFavoriteItemsExpiried(request *GetFavoriteItemsExpiried) (*GetFavoriteItemsExpiriedResponse, error) {
+	response := new(GetFavoriteItemsExpiriedResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/GetFavoriteItemsExpiried", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) GetLoyaltySettings(request *GetLoyaltySettings) (*GetLoyaltySettingsResponse, error) {
+	response := new(GetLoyaltySettingsResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/GetLoyaltySettings", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) GetStores(request *GetStores) (*GetStoresResponse, error) {
+	response := new(GetStoresResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/GetStores", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) GetStore(request *GetStore) (*GetStoreResponse, error) {
+	response := new(GetStoreResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/GetStore", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) GetStoreProperties(request *GetStoreProperties) (*GetStorePropertiesResponse, error) {
+	response := new(GetStorePropertiesResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/GetStoreProperties", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) GetStorePropertyValues(request *GetStorePropertyValues) (*GetStorePropertyValuesResponse, error) {
+	response := new(GetStorePropertyValuesResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/GetStorePropertyValues", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) GetCompanies(request *GetCompanies) (*GetCompaniesResponse, error) {
+	response := new(GetCompaniesResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/GetCompanies", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) GetAdministrativeAreas(request *GetAdministrativeAreas) (*GetAdministrativeAreasResponse, error) {
+	response := new(GetAdministrativeAreasResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/GetAdministrativeAreas", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) GetLocalities(request *GetLocalities) (*GetLocalitiesResponse, error) {
+	response := new(GetLocalitiesResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/GetLocalities", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) About(request *About) (*AboutResponse, error) {
+	response := new(AboutResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/About", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) GetFakeColorType(request *GetFakeColorType) (*GetFakeColorTypeResponse, error) {
+	response := new(GetFakeColorTypeResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/GetFakeColorType", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func (service *iRSLoyaltyClientService) GetFakeRegistrationBotProtectionType(request *GetFakeRegistrationBotProtectionType) (*GetFakeRegistrationBotProtectionTypeResponse, error) {
+	response := new(GetFakeRegistrationBotProtectionTypeResponse)
+	err := service.client.Call("urn:IRSLoyaltyClientService/GetFakeRegistrationBotProtectionType", request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
