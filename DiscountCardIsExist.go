@@ -12,18 +12,15 @@ type DiscountCardIsExistResponse struct {
 	DiscountCardIsExistResult bool     `xml:"DiscountCardIsExistResult,omitempty"`
 }
 
-func (rsl RSLoyaltyWebService) DiscountCardIsExist(config RSLoyaltyWebService, channel string, identifier int64, DiscountCardNumber string) bool {
-
-	rsl.Init(config, channel, identifier)
+func (rsl RSLoyaltyWebService) DiscountCardIsExist(DiscountCardNumber string) (bool, error) {
 
 	var request = &DiscountCardIsExist{DiscountCardNumber: DiscountCardNumber}
 	var response = &DiscountCardIsExistResponse{}
 
-	_, err := rsl.Soap2(channel, identifier, request, "DiscountCardIsExist", response)
+	err := rsl.Soap("", request, "DiscountCardIsExist", response)
 	if err != nil {
-		//log.Println("Ошибка выполнения запроса")
-		//return settings
+		return false, err
 	}
 
-	return response.DiscountCardIsExistResult
+	return response.DiscountCardIsExistResult, nil
 }

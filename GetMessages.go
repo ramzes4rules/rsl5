@@ -2,8 +2,7 @@ package methods
 
 import (
 	"encoding/xml"
-	"log"
-	"unibot/RSLoyatyWebService/DTO"
+	"github.com/ramzes4rules/rsl5/DTO"
 )
 
 type GetMessages struct {
@@ -19,19 +18,16 @@ type ArrayOfMailingToCustomer struct {
 	MailingToCustomer []*DTO.MailingToCustomerDTO `xml:"MailingToCustomer,omitempty"`
 }
 
-func (rsl RSLoyaltyWebService) GetMessages(config RSLoyaltyWebService, channel string, identifier int64, token string) []*DTO.MailingToCustomerDTO {
-
-	rsl.Init(config, channel, identifier)
+func (rsl RSLoyaltyWebService) GetMessages(token string) ([]*DTO.MailingToCustomerDTO, error) {
 
 	var request = &GetMessages{Token: token}
 	var response = &GetMessagesResponse{}
 
-	_, err := rsl.Soap2(channel, identifier, request, "GetMessages", response)
+	err := rsl.Soap("", request, "GetMessages", response)
 	if err != nil {
-		log.Println("Ошибка выполнения запроса")
-		//return settings
+		return nil, err
 	}
 
-	return response.GetMessagesResult.MailingToCustomer
+	return response.GetMessagesResult.MailingToCustomer, nil
 
 }

@@ -2,17 +2,16 @@ package methods
 
 import (
 	"encoding/xml"
-	"log"
-	"unibot/RSLoyatyWebService/DTO"
+	"github.com/ramzes4rules/rsl5/DTO"
 )
 
 type GetRetirementData struct {
-	XMLName xml.Name `xml:" GetRetirementData"`
+	XMLName xml.Name `xml:"GetRetirementData"`
 	Token   string   `xml:"token,omitempty"`
 }
 
 type GetRetirementDataResponse struct {
-	XMLName                 xml.Name                  `xml:" GetRetirementDataResponse"`
+	XMLName                 xml.Name                  `xml:"GetRetirementDataResponse"`
 	GetRetirementDataResult *ArrayOfRetirementDataDTO `xml:"GetRetirementDataResult,omitempty"`
 }
 
@@ -20,18 +19,15 @@ type ArrayOfRetirementDataDTO struct {
 	RetirementData []*DTO.RetirementDataDTO `xml:"RetirementDataDTO,omitempty"`
 }
 
-func (rsl RSLoyaltyWebService) GetRetirementData(config RSLoyaltyWebService, channel string, identifier int64, token string) []*DTO.RetirementDataDTO {
-
-	rsl.Init(config, channel, identifier)
+func (rsl RSLoyaltyWebService) GetRetirementData(token string) ([]*DTO.RetirementDataDTO, error) {
 
 	var request = &GetRetirementData{Token: token}
 	var response = &GetRetirementDataResponse{}
 
-	_, err := rsl.Soap2(channel, identifier, request, "GetRetirementData", response)
+	err := rsl.Soap("", request, "GetRetirementData", response)
 	if err != nil {
-		log.Println("Ошибка выполнения запроса", err)
-		//return settings
+		return nil, err
 	}
 
-	return response.GetRetirementDataResult.RetirementData
+	return response.GetRetirementDataResult.RetirementData, nil
 }

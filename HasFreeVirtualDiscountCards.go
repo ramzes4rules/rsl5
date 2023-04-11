@@ -2,7 +2,6 @@ package methods
 
 import (
 	"encoding/xml"
-	"log"
 )
 
 type HasFreeVirtualDiscountCardsRequest struct {
@@ -14,19 +13,16 @@ type HasFreeVirtualDiscountCardsResponse struct {
 	Result  bool     `xml:"HasFreeVirtualDiscountCardsResult"`
 }
 
-func (rsl RSLoyaltyWebService) HasFreeVirtualDiscountCards(channel string, identifier int64) bool {
+func (rsl RSLoyaltyWebService) HasFreeVirtualDiscountCards() (bool, error) {
 
 	var request = &HasFreeVirtualDiscountCardsRequest{}
 	var response = &HasFreeVirtualDiscountCardsResponse{}
 
-	status, err := rsl.Soap2(channel, identifier, request, "HasFreeVirtualDiscountCards", response)
+	err := rsl.Soap("", request, "HasFreeVirtualDiscountCards", response)
 	if err != nil {
-		log.Println("Ошибка выполнения запроса")
-		return false
+		return false, err
 	}
-	if status == "200 OK" {
-		return response.Result
-	} else {
-		return false
-	}
+
+	return response.Result, nil
+
 }

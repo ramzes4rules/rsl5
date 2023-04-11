@@ -2,7 +2,7 @@ package methods
 
 import (
 	"encoding/xml"
-	"unibot/RSLoyatyWebService/DTO"
+	"github.com/ramzes4rules/rsl5/DTO"
 )
 
 type GetCustomersProperties struct {
@@ -16,24 +16,16 @@ type GetCustomersPropertiesResponse struct {
 	GetCustomersPropertiesResult *DTO.ArrayOfProperty `xml:"GetCustomersPropertiesResult,omitempty"`
 }
 
-func (rsl RSLoyaltyWebService) GetCustomersProperties() []*DTO.Property {
-
-	//rsl.Init(config, channel, identifier)
-
-	//var name = fmt.Sprintf(lhm, channel, identifier, "RSLoyaltyWebService.GetCustomersProperties")
+func (rsl RSLoyaltyWebService) GetCustomersProperties() ([]*DTO.PropertyGet, error) {
 
 	var request = &GetCustomersProperties{}
 	var response = &GetCustomersPropertiesResponse{}
 
-	status, err := rsl.Soap2("", 0, request, "GetCustomersProperties", response)
+	err := rsl.Soap("", request, "GetCustomersProperties", response)
 	if err != nil {
-		//nestor.Error(name, fmt.Sprintf("Ошибка выполнения запроса: %v", err))
+		return nil, err
 	}
 
-	if status == "200 OK" {
-		//nestor.Debug(name, fmt.Sprintf("Получено Properties: %d", len(response.GetCustomersPropertiesResult.Property)))
-		return response.GetCustomersPropertiesResult.Property
+	return response.GetCustomersPropertiesResult.Property, nil
 
-	}
-	return nil
 }

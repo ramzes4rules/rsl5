@@ -1,8 +1,8 @@
 package DTO
 
 type EnumPropertyValue struct {
-	EnumPropertyValueID int64  `xml:"EnumPropertyValueID,omitempty"`
-	IsDeleted           bool   `xml:"IsDeleted,omitempty"`
-	LoadDate            string `xml:"LoadDate,omitempty"`
-	Name                string `xml:"Name,omitempty"`
+	EnumPropertyValueID int64  `xml:"a:EnumPropertyValueID,omitempty"`
+	IsDeleted           bool   `xml:"a:IsDeleted,omitempty"`
+	LoadDate            string `xml:"a:LoadDate,omitempty"`
+	Name                string `xml:"a:Name,omitempty"`
 }

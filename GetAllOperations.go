@@ -2,7 +2,7 @@ package methods
 
 import (
 	"encoding/xml"
-	"unibot/RSLoyatyWebService/DTO"
+	"github.com/ramzes4rules/rsl5/DTO"
 )
 
 type GetAllOperations struct {
@@ -17,18 +17,15 @@ type ArrayOfCheque struct {
 	Cheque []*DTO.ChequeDTO `xml:"Cheque,omitempty"`
 }
 
-func (rsl RSLoyaltyWebService) GetAllOperations(config RSLoyaltyWebService, channel string, identifier int64, token string) []*DTO.ChequeDTO {
-
-	rsl.Init(config, channel, identifier)
+func (rsl RSLoyaltyWebService) GetAllOperations(token string) ([]*DTO.ChequeDTO, error) {
 
 	var request = &GetAllOperations{Token: token}
 	var response = &GetAllOperationsResponse{}
 
-	_, err := rsl.Soap2(channel, identifier, request, "GetAllOperations", response)
+	err := rsl.Soap("", request, "GetAllOperations", response)
 	if err != nil {
-		//log.Println("Ошибка выполнения запроса")
-		//return settings
+		return []*DTO.ChequeDTO{}, err
 	}
 
-	return response.GetAllOperationsResult.Cheque
+	return response.GetAllOperationsResult.Cheque, nil
 }

@@ -2,7 +2,7 @@ package methods
 
 import (
 	"encoding/xml"
-	"unibot/RSLoyatyWebService/DTO"
+	"github.com/ramzes4rules/rsl5/DTO"
 )
 
 type GetPhoneDiscountCards struct {
@@ -16,22 +16,16 @@ type GetPhoneDiscountCardsResponse struct {
 	GetPhoneDiscountCardsResult *ArrayOfDiscountCard `xml:"GetPhoneDiscountCardsResult,omitempty"`
 }
 
-func (rsl RSLoyaltyWebService) GetPhoneDiscountCards(phone string) []*DTO.DiscountCardDTO {
-
-	//rsl.Init(config, channel, identifier)
-
-	//var name = fmt.Sprintf(lhm, channel, identifier, "RSLoyaltyWebService.GetPhoneDiscountCards")
-	//nestor.Debug(name, "Получение списка дисконтных карт по номеру телефона.")
+func (rsl RSLoyaltyWebService) GetPhoneDiscountCards(phone string) ([]*DTO.DiscountCardDTO, error) {
 
 	var request = &GetPhoneDiscountCards{Phone: phone, Token: rsl.PrivateKey}
 	var response = &GetPhoneDiscountCardsResponse{}
-	//nestor.Debug(name, "Объекты созданы.")
 
-	_, err := rsl.Soap2("", 0, request, "GetPhoneDiscountCards", response)
+	err := rsl.Soap("", request, "GetPhoneDiscountCards", response)
 	if err != nil {
-		//nestor.Error(name, fmt.Sprintf("Ошибка выполнения запроса: %v", err))
-		return []*DTO.DiscountCardDTO{}
+
+		return nil, err
 	}
 
-	return response.GetPhoneDiscountCardsResult.DiscountCard
+	return response.GetPhoneDiscountCardsResult.DiscountCard, nil
 }

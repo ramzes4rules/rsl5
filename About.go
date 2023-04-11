@@ -2,7 +2,7 @@ package methods
 
 import (
 	"encoding/xml"
-	"unibot/RSLoyatyWebService/DTO"
+	"github.com/ramzes4rules/rsl5/DTO"
 )
 
 type AboutRequest struct {
@@ -17,21 +17,15 @@ type AboutResult struct {
 	Abouts  []DTO.About `xml:"AboutDTO"`
 }
 
-func (rsl *RSLoyaltyWebService) About() []DTO.About {
+func (rsl RSLoyaltyWebService) About() ([]DTO.About, error) {
 
 	var request = &AboutRequest{}
 	var response = &AboutResponse{}
 
-	var abouts []DTO.About
-	_, err := rsl.Soap("", request, "About", response)
+	err := rsl.Soap("", request, "About", response)
 	if err != nil {
-		//log.Println("Ошибка выполнения запроса")
-		return abouts
+		return []DTO.About{}, err
 	}
-	//log.Println("Статус выполения запроса:", status)
-	//log.Println(len(response.Result.Abouts))
-	//log.Println(response.Result.Abouts[0].CompanyName)
 
-	abouts = response.Result.Abouts
-	return abouts
+	return response.Result.Abouts, nil
 }

@@ -2,9 +2,7 @@ package methods
 
 import (
 	"encoding/xml"
-	"fmt"
-	"log"
-	"unibot/RSLoyatyWebService/DTO"
+	"github.com/ramzes4rules/rsl5/DTO"
 )
 
 type GetCustomerRegisterDataRequest struct {
@@ -17,33 +15,15 @@ type GetCustomerRegisterDataResponse struct {
 	GetCustomerRegisterDataResult DTO.RegisterCustomerDTO `xml:"GetCustomerRegisterDataResult"`
 }
 
-func (rsl RSLoyaltyWebService) GetCustomerRegisterData(channel string, identifier int64, discountCard string) *GetCustomerRegisterDataResponse {
-
-	//rsl.Init()
-	var debug = true
-	var name = fmt.Sprintf("%s %d %s", channel, identifier, "GetCustomerRegisterData")
-	if debug {
-		log.Printf("%s Выполнение проверки кода.", name)
-	}
+func (rsl RSLoyaltyWebService) GetCustomerRegisterData(discountCard string) (*GetCustomerRegisterDataResponse, error) {
 
 	var request = &GetCustomerRegisterDataRequest{DiscountCard: discountCard}
 	var response = &GetCustomerRegisterDataResponse{}
-	if debug {
-		log.Printf("%s Сформированы объекты ДТО.", name)
-	}
 
-	if debug {
-		log.Printf("%s Отправляем запрос в лояльность", name)
-	}
-	status, err := rsl.Soap2(channel, identifier, request, "GetCustomerRegisterData", response)
+	err := rsl.Soap("", request, "GetCustomerRegisterData", response)
 	if err != nil {
-		log.Printf("%s Ошибка выполнения запроса", name)
+		return nil, err
 	}
 
-	if status == "200 OK" {
-		if debug {
-			log.Printf("%s Запрос на получение объекта UserData выполнен успешно.", name)
-		}
-	}
-	return response
+	return response, nil
 }

@@ -3,10 +3,9 @@ package methods
 import (
 	"crypto/tls"
 	"encoding/xml"
-	"fmt"
 	"github.com/pkg/errors"
-	//Mara "github.com/ramzes4rules/mara"
-	"io/ioutil"
+	"io"
+
 	"log"
 	"net/http"
 	"strings"
@@ -41,32 +40,33 @@ type ResponseBody struct {
 	Response any      //`xml:"AboutResponse"`
 }
 
-func (rsl5 RSL5) Soap(identifier string, request any, method string, response any) error {
+func (rsl RSLoyaltyWebService) Soap(identifier string, request any, method string, response any) error {
 
-	var service = fmt.Sprintf("%s [%s]", "SoapRequest", identifier)
+	//var service = fmt.Sprintf("%s [%s]", "SoapRequest", identifier)
 	var fault Fault
-	var mara = rsl5.Mara
-	mara.Trace(service, "*** Выполнение soap-запроса.")
+	//var mara = rsl.Mara
+	//mara.Trace(service, "*** Выполнение soap-запроса.")
 
-	mara.Trace(service, "Отключаем проверку ssl-сертификата.")
+	//mara.Trace(service, "Отключаем проверку ssl-сертификата.")
 	http.DefaultTransport.(*http.Transport).TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
-	mara.Trace(service, "Проверка ssl-сертификата отключена.")
+	//mara.Trace(service, "Проверка ssl-сертификата отключена.")
 
-	mara.Trace(service, "Формируем soap-запрос.")
+	//mara.Trace(service, "Формируем soap-запрос.")
 	var Envelope = RequestEnvelope{Xmlns: "http://schemas.xmlsoap.org/soap/envelope/"}
 	Envelope.Body.Request = request
 	req1, err := xml.Marshal(Envelope)
 	if err != nil {
-		mara.Error(service, fmt.Sprintf("%v", err))
+		//mara.Error(service, fmt.Sprintf("%v", err))
 	}
 	req2 := header + string(req1)
-	mara.Debug(service, fmt.Sprintf("Запрос для отправки сформирован: %s", req2))
+	//fmt.Println(req2)
+	//mara.Debug(service, fmt.Sprintf("Запрос для отправки сформирован: %s", req2))
 
-	mara.Trace(service, "Создаем http-запрос.")
+	//mara.Trace(service, "Создаем http-запрос.")
 	payload := strings.NewReader(req2)
-	req, err := http.NewRequest("POST", rsl5.Url, payload)
+	req, err := http.NewRequest("POST", rsl.Url, payload)
 	if err != nil {
-		mara.Error(service, fmt.Sprintf("Ошибка создания запроса: %v", err))
+		//mara.Error(service, fmt.Sprintf("Ошибка создания запроса: %v", err))
 		return err
 	}
 	req.Header.Add("soapAction", "urn:IRSLoyaltyClientService/"+method)
@@ -74,26 +74,26 @@ func (rsl5 RSL5) Soap(identifier string, request any, method string, response an
 
 	//
 	client := &http.Client{}
-	client.Timeout = 30 * time.Second
+	client.Timeout = time.Duration(rsl.Timeout) * time.Second
 	res, err := client.Do(req)
 	if err != nil {
-		mara.Error(service, fmt.Sprintf("Ошибка выполнения запроса: %v", err))
+		//mara.Error(service, fmt.Sprintf("Ошибка выполнения запроса: %v", err))
 		return err
 	}
-	mara.Trace(service, fmt.Sprintf("Запрос выполнен, статус: %s", res.Status))
+	//mara.Trace(service, fmt.Sprintf("Запрос выполнен, статус: %s", res.Status))
 
 	// Читаем ответ
-	body, err := ioutil.ReadAll(res.Body)
+	body, err := io.ReadAll(res.Body)
 	if err != nil {
 		log.Println("Ошибка чтения ответа:", err)
 		return err
 	}
-	mara.Debug(service, fmt.Sprintf("Ответ лояльности: %s", string(body)))
+	//mara.Debug(service, fmt.Sprintf("Ответ лояльности: %s", string(body)))
 
 	var r = strings.Replace(string(body),
 		"<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\"><s:Body>", "", -1)
 	r = strings.Replace(r, "</s:Body></s:Envelope>", "", -1)
-	mara.Trace(service, fmt.Sprintf("Получен результат: '%s'", r))
+	//mara.Trace(service, fmt.Sprintf("Получен результат: '%s'", r))
 	//fmt.Println(service, fmt.Sprintf("Получен результат: '%s'", r))
 
 	// Парсим ответ
@@ -101,19 +101,19 @@ func (rsl5 RSL5) Soap(identifier string, request any, method string, response an
 	case "500 Internal Server Error":
 		err = xml.Unmarshal([]byte(r), &fault)
 		if err != nil {
-			mara.Error(service, fmt.Sprintf("Ошибка парсинга объекта fault: '%v'", err))
+			//mara.Error(service, fmt.Sprintf("Ошибка парсинга объекта fault: '%v'", err))
 			return err
 		}
-		mara.Error(service, fmt.Sprintf("Получена ошибка выполнения запроса: '%s'", fault.Faultstring))
+		//mara.Error(service, fmt.Sprintf("Получена ошибка выполнения запроса: '%s'", fault.Faultstring))
 
 		return errors.New(fault.Faultstring)
 	default:
 		err = xml.Unmarshal([]byte(r), &response)
 		if err != nil {
-			mara.Error(service, fmt.Sprintf("Ошибка парсинга: %v", err))
+			//mara.Error(service, fmt.Sprintf("Ошибка парсинга: %v", err))
 			return err
 		}
-		mara.Trace(service, fmt.Sprintf("Разобран ответ: %s", response))
+		//mara.Trace(service, fmt.Sprintf("Разобран ответ: %s", response))
 		return nil
 	}
 

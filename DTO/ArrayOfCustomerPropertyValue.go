@@ -1,5 +1,5 @@
 package DTO
 
 type ArrayOfCustomerPropertyValue struct {
-	CustomerPropertyValue []*CustomerPropertyValue `xml:"CustomerPropertyValue,omitempty"`
+	CustomerPropertyValue []*CustomerPropertyValue `xml:"a:CustomerPropertyValue,omitempty"`
 }

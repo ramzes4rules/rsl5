@@ -2,7 +2,6 @@ package methods
 
 import (
 	"encoding/xml"
-	"fmt"
 )
 
 type TestCodeRequest struct {
@@ -16,20 +15,12 @@ type TestCodeResponse struct {
 	TestCodeResult string   `xml:"TestCodeResult"`
 }
 
-func (rsl RSLoyaltyWebService) TestCode(channel string, identifier int64, phone string, code string) string {
-
-	var name = fmt.Sprintf("%s %d %s", channel, identifier, "TestCode")
-	nestor.Debug(name, "Проверка кода подтверждения.")
-
+func (rsl RSLoyaltyWebService) TestCode(phone string, code string) (string, error) {
 	var request = &TestCodeRequest{Phone: phone, Code: code}
 	var response = &TestCodeResponse{}
-
-	_, err := rsl.Soap2(channel, identifier, request, "TestCode", response)
+	err := rsl.Soap("", request, "TestCode", response)
 	if err != nil {
-		nestor.Error(name, fmt.Sprintf("Ошибка: %v", err))
-		return fmt.Sprintf("%v", err)
+		return "", err
 	}
-
-	nestor.Debug(name, fmt.Sprintf("Результат проверки: '%s'", response.TestCodeResult))
-	return response.TestCodeResult
+	return response.TestCodeResult, nil
 }

@@ -2,12 +2,11 @@ package methods
 
 import (
 	"encoding/xml"
-	"log"
-	"unibot/RSLoyatyWebService/DTO"
+	"github.com/ramzes4rules/rsl5/DTO"
 )
 
 type GetAllUserTransactions struct {
-	XMLName xml.Name `xml:" GetAllUserTransactions"`
+	XMLName xml.Name `xml:"GetAllUserTransactions"`
 	Token   string   `xml:"token,omitempty"`
 }
 
@@ -20,17 +19,15 @@ type ArrayOfTransaction struct {
 	Transactions []*DTO.TransactionDTO `xml:"Transaction,omitempty"`
 }
 
-func (rsl RSLoyaltyWebService) GetUserAllTransactions(config RSLoyaltyWebService, channel string, identifier int64, token string) []*DTO.TransactionDTO {
-
-	rsl.Init(config, channel, identifier)
+func (rsl RSLoyaltyWebService) GetUserAllTransactions(token string) ([]*DTO.TransactionDTO, error) {
 
 	var request = &GetAllUserTransactions{Token: token}
 	var response = &GetAllUserTransactionsResponse{}
 
-	_, err := rsl.Soap2(channel, identifier, request, "GetAllUserTransactions", response)
+	err := rsl.Soap("", request, "GetAllUserTransactions", response)
 	if err != nil {
-		log.Println("Ошибка выполнения запроса", err)
+		return nil, err
 	}
 
-	return response.GetAllUserTransactionsResult.Transactions
+	return response.GetAllUserTransactionsResult.Transactions, nil
 }

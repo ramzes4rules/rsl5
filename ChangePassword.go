@@ -2,8 +2,6 @@ package methods
 
 import (
 	"encoding/xml"
-	"fmt"
-	"log"
 )
 
 type ChangePassword struct {
@@ -19,34 +17,15 @@ type ChangePasswordResponse struct {
 	ChangePasswordResult bool     `xml:"ChangePasswordResult,omitempty"`
 }
 
-func (rsl RSLoyaltyWebService) ChangePassword(channel string, identifier int64, token string, password string, checkToken string, info string) bool {
-
-	//rsl.Init()
-	var trace = false
-	var name = fmt.Sprintf(lhm, channel, identifier, "ChangePassword")
-	if trace {
-		log.Printf("%s Изменение пароля.\n", name)
-	}
+func (rsl RSLoyaltyWebService) ChangePassword(token string, password string, checkToken string, info string) (bool, error) {
 
 	var request = &ChangePassword{Token: token, NewPassword: password, CheckToken: checkToken, Info: info}
 	var response = &ChangePasswordResponse{}
-	if trace {
-		log.Printf("%s Сформированы объекты ДТО.", name)
-	}
 
-	if trace {
-		log.Printf("%s Отправляем запрос в лояльность", name)
-	}
-	status, err := rsl.Soap2(channel, identifier, request, "ChangePassword", response)
+	err := rsl.Soap("", request, "ChangePassword", response)
 	if err != nil {
-		log.Printf("%s Ошибка выполнения запроса", name)
-		return false
+		return false, err
 	}
 
-	if status == "200 OK" {
-		return response.ChangePasswordResult
-	} else {
-		return response.ChangePasswordResult
-	}
-
+	return response.ChangePasswordResult, nil
 }

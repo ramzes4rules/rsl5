@@ -2,8 +2,7 @@ package methods
 
 import (
 	"encoding/xml"
-	"fmt"
-	"unibot/RSLoyatyWebService/DTO"
+	"github.com/ramzes4rules/rsl5/DTO"
 )
 
 type GetCustomerData struct {
@@ -16,18 +15,15 @@ type GetCustomerDataResponse struct {
 	GetCustomerDataResult *DTO.Customer `xml:"GetCustomerDataResult,omitempty"`
 }
 
-func (rsl RSLoyaltyWebService) GetCustomerData(config RSLoyaltyWebService, channel string, identifier int64, token string) *DTO.Customer {
-
-	rsl.Init(config, channel, identifier)
+func (rsl RSLoyaltyWebService) GetCustomerData(token string) (*DTO.Customer, error) {
 
 	var request = &GetCustomerData{Token: token}
 	var response = &GetCustomerDataResponse{}
 
-	_, err := rsl.Soap2(channel, identifier, request, "GetCustomerData", response)
+	err := rsl.Soap("", request, "GetCustomerData", response)
 	if err != nil {
-		nestor.Error("", fmt.Sprintf("Ошибка: %v", err))
-		return nil
+		return nil, err
 	}
 
-	return response.GetCustomerDataResult
+	return response.GetCustomerDataResult, nil
 }

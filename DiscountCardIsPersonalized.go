@@ -2,7 +2,6 @@ package methods
 
 import (
 	"encoding/xml"
-	"fmt"
 )
 
 type DiscountCardIsPersonalized struct {
@@ -15,19 +14,16 @@ type DiscountCardIsPersonalizedResponse struct {
 	DiscountCardIsPersonalizedResult bool     `xml:"DiscountCardIsPersonalizedResult,omitempty"`
 }
 
-func (rsl RSLoyaltyWebService) DiscountCardIsPersonalized(config RSLoyaltyWebService, channel string, identifier int64, DiscountCardNumber string) bool {
+func (rsl RSLoyaltyWebService) DiscountCardIsPersonalized(DiscountCardNumber string) (bool, error) {
 
-	rsl.Init(config, channel, identifier)
-
-	var name = fmt.Sprintf("[%s/%d %s]", channel, identifier, "RSLoyaltyWebService.DiscountCardIsPersonalized")
 	var request = &DiscountCardIsPersonalized{DiscountCardNumber: DiscountCardNumber}
 	var response = &DiscountCardIsPersonalizedResponse{}
 
-	_, err := rsl.Soap2(channel, identifier, request, "DiscountCardIsPersonalized", response)
+	err := rsl.Soap("", request, "DiscountCardIsPersonalized", response)
 	if err != nil {
-		nestor.Error(name, fmt.Sprintf("Ошибка выполнения запроса: %v", err))
+		return false, err
 	}
 
-	return response.DiscountCardIsPersonalizedResult
+	return response.DiscountCardIsPersonalizedResult, nil
 
 }

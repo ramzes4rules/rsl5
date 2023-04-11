@@ -2,8 +2,7 @@ package methods
 
 import (
 	"encoding/xml"
-	"fmt"
-	"unibot/RSLoyatyWebService/DTO"
+	"github.com/ramzes4rules/rsl5/DTO"
 )
 
 type ActivateClientService struct {
@@ -18,29 +17,12 @@ type ActivateClientServiceResponse struct {
 	Info                        string   `xml:"info,omitempty"`
 }
 
-func (rsl RSLoyaltyWebService) ActivateClientService(channel string, identifier int64, userData DTO.RegisterCustomerDTO, info string) (string, string, string) {
-
-	var name = fmt.Sprintf("[%s/%d] %s", channel, identifier, "RSLoyaltyWebService.ActivateClientService")
-	nestor.Debug(name, fmt.Sprintf("Активация пользователя '%s %s'.", userData.FirstName, userData.LastName))
-
+func (rsl RSLoyaltyWebService) ActivateClientService(userData DTO.RegisterCustomerDTO, info string) (string, string, error) {
 	var request = &ActivateClientService{UserData: userData, Info: info}
 	var response = &ActivateClientServiceResponse{}
-	nestor.Debug(name, "Сформированы объекты DTO.")
-	//nestor.Debug(name, fmt.Sprintf("CreateVirtual: %t", request.UserData.CreateVirtual))
-
-	nestor.Debug(name, "Отправляем запрос в лояльность")
-	status, err := rsl.Soap2(channel, identifier, request, "ActivateClientService", response)
+	err := rsl.Soap("", request, "ActivateClientService", response)
 	if err != nil {
-		nestor.Error(name, "Ошибка выполнения запроса, завершаем работу")
-		return "Error", "", ""
+		return "", "", err
 	}
-
-	if status == "200 OK" {
-		nestor.Debug(name, fmt.Sprintf("Клиент активирован. Привязана карта %s, получено сообщение для клиента '%s'",
-			response.ActivateClientServiceResult, response.Info))
-		return status, response.ActivateClientServiceResult, response.Info
-	} else {
-		nestor.Error(name, fmt.Sprintf("Ошибка активации клиента, завершаем работу"))
-		return status, "", ""
-	}
+	return response.ActivateClientServiceResult, response.Info, nil
 }

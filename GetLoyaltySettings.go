@@ -2,8 +2,7 @@ package methods
 
 import (
 	"encoding/xml"
-	"log"
-	"unibot/RSLoyatyWebService/DTO"
+	"github.com/ramzes4rules/rsl5/DTO"
 )
 
 type GetLoyaltySettingsRequest struct {
@@ -20,25 +19,16 @@ type GetLoyaltySettingsResult struct {
 	Result  []DTO.LoyaltySettingDTO `xml:"LoyaltySettingDTO"`
 }
 
-func (rsl RSLoyaltyWebService) GetLoyaltySettings() []DTO.LoyaltySettingDTO {
-
-	//rsl.Init()
+func (rsl RSLoyaltyWebService) GetLoyaltySettings() ([]DTO.LoyaltySettingDTO, error) {
 
 	var request = &GetLoyaltySettingsRequest{}
 	var response = &GetLoyaltySettingsResponse{}
-	//response.GetLoyaltySettingsResult.Xmlnsa = "http://schemas.datacontract.org/2004/07/RS.Loyalty.WebClientPortal.Core.Model"
-	//response.GetLoyaltySettingsResult.Xmlnsi = "http://www.w3.org/2001/XMLSchema-instance"
 
 	var settings []DTO.LoyaltySettingDTO
-	status, err := rsl.Soap2("", 0, request, "GetLoyaltySettings", response)
+	err := rsl.Soap("", request, "GetLoyaltySettings", response)
 	if err != nil {
-		log.Println("Ошибка выполнения запроса")
-		return settings
+		return settings, err
 	}
 
-	if status == "200 OK" {
-		settings = response.GetLoyaltySettingsResult.Result
-	}
-
-	return settings
+	return response.GetLoyaltySettingsResult.Result, nil
 }
