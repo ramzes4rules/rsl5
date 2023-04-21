@@ -42,16 +42,9 @@ type ResponseBody struct {
 
 func (rsl RSLoyaltyWebService) Soap(identifier string, request any, method string, response any) error {
 
-	//var service = fmt.Sprintf("%s [%s]", "SoapRequest", identifier)
 	var fault Fault
-	//var mara = rsl.Mara
-	//mara.Trace(service, "*** Выполнение soap-запроса.")
 
-	//mara.Trace(service, "Отключаем проверку ssl-сертификата.")
 	http.DefaultTransport.(*http.Transport).TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
-	//mara.Trace(service, "Проверка ssl-сертификата отключена.")
-
-	//mara.Trace(service, "Формируем soap-запрос.")
 	var Envelope = RequestEnvelope{Xmlns: "http://schemas.xmlsoap.org/soap/envelope/"}
 	Envelope.Body.Request = request
 	req1, err := xml.Marshal(Envelope)
@@ -60,7 +53,6 @@ func (rsl RSLoyaltyWebService) Soap(identifier string, request any, method strin
 	}
 	req2 := header + string(req1)
 	//fmt.Println(req2)
-	//mara.Debug(service, fmt.Sprintf("Запрос для отправки сформирован: %s", req2))
 
 	//mara.Trace(service, "Создаем http-запрос.")
 	payload := strings.NewReader(req2)
